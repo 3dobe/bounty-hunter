@@ -39,7 +39,3 @@ nbproject
 .idea
 
 
-########################
-# local config
-########################
-config/local.js
