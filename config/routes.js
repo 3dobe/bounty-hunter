@@ -36,13 +36,13 @@ module.exports.routes = {
     view: 'home/index'
   },
 
-  '/login' : {
-      /*controller : 'state',
-      action : 'login'*/
-      view : 'home/login'
+  /*用户登陆与登出*/
+  'post /login' : {
+      controller : 'state',
+      action : 'login'
   },
 
-  '/logout' : {
+  'post /logout' : {
       controller: 'state',
       action: 'logout'
   }
