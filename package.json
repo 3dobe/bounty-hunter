@@ -10,7 +10,9 @@
     "optimist": "0.3.4",
     "jade": "~1.3.1",
     "underscore": "~1.6.0",
-    "sails-mysql": "~0.9.9"
+    "sails-mysql": "~0.9.9",
+    "bufferhelper": "~0.2.0",
+    "iconv-lite": "~0.2.11"
   },
   "scripts": {
     "start": "node app.js",

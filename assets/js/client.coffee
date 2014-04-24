@@ -11,7 +11,6 @@ _ = require("underscore")
 BufferHelper = require("bufferhelper")
 iconv = require("iconv-lite")
 stdCharset = "utf8"
-module.exports = Client
 Client::get = (path, data, headers, callback) ->
   @request path, data, headers, callback, "GET"
 
@@ -80,3 +79,4 @@ Client::request = (path, data, headers, callback, method) ->
     data and req.write(data)
     req.end()
     this
+module.exports = Client

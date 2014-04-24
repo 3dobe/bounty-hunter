@@ -37,7 +37,7 @@ module.exports.routes = {
   },
 
   /*用户登陆与登出*/
-  'post /login' : {
+  '/login' : {
       controller : 'state',
       action : 'login'
   },

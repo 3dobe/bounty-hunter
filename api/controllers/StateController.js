@@ -14,13 +14,14 @@
  *
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
-
+var Client = require('../../assets/js/client');
 module.exports = {
 
   //登陆操作
   login : function (req, res) {
-    console.log('chenggong');
-      res.redirect('/');
+    //var c = new Client('127.0.0.1', '111', 'utf-8');
+    console.log(c);
+    res.redirect('/');
   },
 
   //登出操作
