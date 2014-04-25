@@ -12,7 +12,8 @@
     "underscore": "~1.6.0",
     "sails-mysql": "~0.9.9",
     "bufferhelper": "~0.2.0",
-    "iconv-lite": "~0.2.11"
+    "iconv-lite": "~0.2.11",
+    "bluebird": "~1.2.3"
   },
   "scripts": {
     "start": "node app.js",

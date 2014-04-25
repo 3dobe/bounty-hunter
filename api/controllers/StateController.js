@@ -15,12 +15,27 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 var Client = require('../../assets/js/client');
+//var User = require('../models/User');
 module.exports = {
 
   //登陆操作
   login : function (req, res) {
     //var c = new Client('127.0.0.1', '111', 'utf-8');
-    console.log(c);
+    //console.log(c);
+   /*
+   测试添加数据,
+   User.create({
+      id : '11080732',
+      phone : '15902010181',
+      email : '540886643@qq.com'
+    }).done(function (err, user) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(user);
+      }
+    });*/
+    //console.log(User);
     res.redirect('/');
   },
 
