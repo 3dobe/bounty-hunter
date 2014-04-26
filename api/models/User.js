@@ -24,13 +24,7 @@ module.exports = {
     class : 'string',
     dataInSchool : 'DATE',
     dormNo : 'string',
-    email: {
-      type : 'email',
-      required : true
-    },
-    phone: {
-      type : 'string',
-      required : true
-    }
+    email: 'email',
+    phone:  'string'
   }
 };

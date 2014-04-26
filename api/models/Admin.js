@@ -7,13 +7,12 @@
  */
 
 module.exports = {
-
+  adapter: 'mysql',
+  schema: true,
+  tableName : 'admins',
   attributes: {
-  	
-  	/* e.g.
-  	nickname: 'string'
-  	*/
-    
+    id : 'integer',
+    username : 'string',
+    password : 'string'
   }
-
 };
