@@ -1,3 +1,4 @@
+var $ = require('jquery');
 module.exports = parseProfile;
 
 function parseProfile(html) {

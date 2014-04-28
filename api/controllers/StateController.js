@@ -42,7 +42,7 @@ module.exports = {
         //4.2.2 抓取失败 返回错误信息,转页
 
    //测试,,结果失败
-   /* var data = {
+    var data = {
       UserCode : '11080732',
       UserPwd : ''
     };
@@ -52,10 +52,11 @@ module.exports = {
         client.get('/createsession_b.asp', {}, {}, function() {
           client.get('/rndnum.asp', {}, {}, function() {
             client.cookie['LogonNumber'] = '';
-            client.post('/logon.asp', data, {}, function(err, res, body){
-              //var success = /welcome/.test(body);
-              console.log(body);
-              if (data) {
+            client.post('/logon.asp', data, {
+                Referer:'http://jwc.wyu.cn/student/body.htm'
+            }, function(err, res, body){
+              var success = /welcome/.test(body);
+              if (success) {
                 // 加载资料
                 var toLoad = [{
                   name: 'profile',
@@ -77,7 +78,7 @@ module.exports = {
           });
         });
       });
-    });*/
+    });
     res.redirect('/');
   },
 
