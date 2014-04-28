@@ -37,12 +37,12 @@ module.exports.routes = {
   },
 
   //登陆页
-  '/login': {
+ /* '/login': {
       view: 'home/login'
-  },
+  },*/
 
   /*用户登陆与登出*/
-  'post /login' : {
+  '/login' : {
       controller : 'state',
       action : 'login'
   },

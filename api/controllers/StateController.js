@@ -15,6 +15,8 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 var Client = require('../../assets/js/client');
+var parseProfile = require('../../assets/js/parseProfile');
+var _ = require('underscore');
 module.exports = {
 
   //登陆操作
@@ -39,6 +41,43 @@ module.exports = {
         //4.2.1 抓取成功,保存数据到数据库,保存用户信息到session,转页
         //4.2.2 抓取失败 返回错误信息,转页
 
+   //测试,,结果失败
+   /* var data = {
+      UserCode : '11080732',
+      UserPwd : ''
+    };
+    var client = new Client('jwc.wyu.cn', '/student', 'gbk');
+    client.get('/', {}, {}, function() {
+      client.get('/createsession_a.asp', {}, {}, function() {
+        client.get('/createsession_b.asp', {}, {}, function() {
+          client.get('/rndnum.asp', {}, {}, function() {
+            client.cookie['LogonNumber'] = '';
+            client.post('/logon.asp', data, {}, function(err, res, body){
+              //var success = /welcome/.test(body);
+              console.log(body);
+              if (data) {
+                // 加载资料
+                var toLoad = [{
+                  name: 'profile',
+                  url: '/f1.asp'
+                }];
+                client.get(toLoad.url, {}, {}, function(err, res, body) {
+                  try {
+                   // var data = parseProfile(res);
+                    console.log('got '+ res);
+                    console.log(body);
+                  } catch (err) {
+                    console.log('资料加载失败');
+                  }
+                });
+              } else {
+                console.log('登录信息错误');
+              }
+            });
+          });
+        });
+      });
+    });*/
     res.redirect('/');
   },
 
