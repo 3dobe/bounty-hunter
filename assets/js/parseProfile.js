@@ -1,5 +1,7 @@
-var $ = require('jquery');
 module.exports = parseProfile;
+
+var parser = require('xml2js').parseString;
+var cheerio = require('cheerio');
 
 function parseProfile(html) {
   html = html.replace(/\r?\n\r?/g, '');
@@ -8,8 +10,9 @@ function parseProfile(html) {
   if (! tableHtml) {
     throw new Error();
   }
+  var $ = cheerio.load(tableHtml);
   var $table = $(tableHtml),
-    $trs = $table.find('tr');
+   $trs = $table.find('tr');
   return {
     code: $trs.eq(0).find('td').eq(1).text(),
     name: $trs.eq(0).find('td').eq(3).text(),

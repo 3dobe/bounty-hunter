@@ -14,7 +14,7 @@
     "bufferhelper": "~0.2.0",
     "iconv-lite": "~0.2.11",
     "bluebird": "~1.2.3",
-    "jquery": "~2.1.0"
+    "cheerio": "~0.15.0"
   },
   "scripts": {
     "start": "node app.js",
