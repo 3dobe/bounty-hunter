@@ -1,6 +1,5 @@
 module.exports = parseProfile;
 
-var parser = require('xml2js').parseString;
 var cheerio = require('cheerio');
 
 function parseProfile(html) {

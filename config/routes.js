@@ -38,82 +38,87 @@ module.exports.routes = {
 
   //登陆页
   '/login': {
-      view: 'home/login'
+    view: 'home/login'
+  },
+
+  /*测试*/
+  'get /logintest': {
+    controller: 'state',
+    action:'login'
   },
 
   /*用户登陆与登出*/
-  'post /login' : {
-      controller : 'state',
-      action : 'login'
+  'post /login': {
+    controller: 'state',
+    action: 'login'
   },
 
-  'post /logout' : {
-      controller: 'state',
-      action: 'logout'
+  'post /logout': {
+    controller: 'state',
+    action: 'logout'
   }
 
   /*
-  // But what if you want your home page to display
-  // a signup form located at `views/user/signup.ejs`?
-  '/': {
-    view: 'user/signup'
-  }
+   // But what if you want your home page to display
+   // a signup form located at `views/user/signup.ejs`?
+   '/': {
+   view: 'user/signup'
+   }
 
 
-  // Let's say you're building an email client, like Gmail
-  // You might want your home route to serve an interface using custom logic.
-  // In this scenario, you have a custom controller `MessageController`
-  // with an `inbox` action.
-  '/': 'MessageController.inbox'
+   // Let's say you're building an email client, like Gmail
+   // You might want your home route to serve an interface using custom logic.
+   // In this scenario, you have a custom controller `MessageController`
+   // with an `inbox` action.
+   '/': 'MessageController.inbox'
 
 
-  // Alternatively, you can use the more verbose syntax:
-  '/': {
-    controller: 'MessageController',
-    action: 'inbox'
-  }
+   // Alternatively, you can use the more verbose syntax:
+   '/': {
+   controller: 'MessageController',
+   action: 'inbox'
+   }
 
 
-  // If you decided to call your action `index` instead of `inbox`,
-  // since the `index` action is the default, you can shortcut even further to:
-  '/': 'MessageController'
+   // If you decided to call your action `index` instead of `inbox`,
+   // since the `index` action is the default, you can shortcut even further to:
+   '/': 'MessageController'
 
 
-  // Up until now, we haven't specified a specific HTTP method/verb
-  // The routes above will apply to ALL verbs!
-  // If you want to set up a route only for one in particular
-  // (GET, POST, PUT, DELETE, etc.), just specify the verb before the path.
-  // For example, if you have a `UserController` with a `signup` action,
-  // and somewhere else, you're serving a signup form looks like: 
-  //
-  //		<form action="/signup">
-  //			<input name="username" type="text"/>
-  //			<input name="password" type="password"/>
-  //			<input type="submit"/>
-  //		</form>
+   // Up until now, we haven't specified a specific HTTP method/verb
+   // The routes above will apply to ALL verbs!
+   // If you want to set up a route only for one in particular
+   // (GET, POST, PUT, DELETE, etc.), just specify the verb before the path.
+   // For example, if you have a `UserController` with a `signup` action,
+   // and somewhere else, you're serving a signup form looks like:
+   //
+   //		<form action="/signup">
+   //			<input name="username" type="text"/>
+   //			<input name="password" type="password"/>
+   //			<input type="submit"/>
+   //		</form>
 
-  // You would want to define the following route to handle your form:
-  'post /signup': 'UserController.signup'
+   // You would want to define the following route to handle your form:
+   'post /signup': 'UserController.signup'
 
 
-  // What about the ever-popular "vanity URLs" aka URL slugs?
-  // (you might remember doing this with `mod_rewrite` in Apache)
-  //
-  // This is where you want to set up root-relative dynamic routes like:
-  // http://yourwebsite.com/twinkletoez
-  //
-  // NOTE:
-  // You'll still want to allow requests through to the static assets,
-  // so we need to set up this route to ignore URLs that have a trailing ".":
-  // (e.g. your javascript, CSS, and image files)
-  'get /*(^.*)': 'UserController.profile'
+   // What about the ever-popular "vanity URLs" aka URL slugs?
+   // (you might remember doing this with `mod_rewrite` in Apache)
+   //
+   // This is where you want to set up root-relative dynamic routes like:
+   // http://yourwebsite.com/twinkletoez
+   //
+   // NOTE:
+   // You'll still want to allow requests through to the static assets,
+   // so we need to set up this route to ignore URLs that have a trailing ".":
+   // (e.g. your javascript, CSS, and image files)
+   'get /*(^.*)': 'UserController.profile'
 
-  */
+   */
 };
 
 
-
-/** 
+/**
  * (3) Action blueprints
  * These routes can be disabled by setting (in `config/controllers.js`):
  * `module.exports.controllers.blueprints.actions = false`
@@ -129,17 +134,17 @@ module.exports.routes = {
  * (4) Shortcut CRUD blueprints
  *
  * These routes can be disabled by setting (in config/controllers.js)
- *			`module.exports.controllers.blueprints.shortcuts = false`
+ *      `module.exports.controllers.blueprints.shortcuts = false`
  *
  * If you have a model, `Foo`, and a controller, `FooController`,
  * you can access CRUD operations for that model at:
- *		/foo/find/:id?	->	search lampshades using specified criteria or with id=:id
+ *    /foo/find/:id?  ->  search lampshades using specified criteria or with id=:id
  *
- *		/foo/create		->	create a lampshade using specified values
+ *    /foo/create    ->  create a lampshade using specified values
  *
- *		/foo/update/:id	->	update the lampshade with id=:id
+ *    /foo/update/:id  ->  update the lampshade with id=:id
  *
- *		/foo/destroy/:id	->	delete lampshade with id=:id
+ *    /foo/destroy/:id  ->  delete lampshade with id=:id
  *
  */
 
@@ -147,18 +152,18 @@ module.exports.routes = {
  * (5) REST blueprints
  *
  * These routes can be disabled by setting (in config/controllers.js)
- *		`module.exports.controllers.blueprints.rest = false`
+ *    `module.exports.controllers.blueprints.rest = false`
  *
  * If you have a model, `Foo`, and a controller, `FooController`,
  * you can access CRUD operations for that model at:
  *
- *		get /foo/:id?	->	search lampshades using specified criteria or with id=:id
+ *    get /foo/:id?  ->  search lampshades using specified criteria or with id=:id
  *
- *		post /foo		-> create a lampshade using specified values
+ *    post /foo    -> create a lampshade using specified values
  *
- *		put /foo/:id	->	update the lampshade with id=:id
+ *    put /foo/:id  ->  update the lampshade with id=:id
  *
- *		delete /foo/:id	->	delete lampshade with id=:id
+ *    delete /foo/:id  ->  delete lampshade with id=:id
  *
  */
 
