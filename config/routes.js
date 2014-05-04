@@ -56,6 +56,11 @@ module.exports.routes = {
   'post /logout': {
     controller: 'state',
     action: 'logout'
+  },
+
+  //发布任务页面
+  '/addtask':{
+    view: 'home/addtask'
   }
 
   /*

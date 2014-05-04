@@ -22,7 +22,7 @@ module.exports = {
   //登陆操作
   login: function (req, res) {
     //1 获取参数前端
-    var option = req.body['option'];
+    var option = req.query['option'];
     //方便测试
     //var option = req.query['option'];
     //2判断为admin登陆 还是 普通用户登陆
@@ -31,7 +31,7 @@ module.exports = {
       //3.1 匹配信息成功,把admin信息保存到session中
       //3.2 匹配信息失败,返回错误信息,转页
       Admin.findOne({
-        username: req.body['username']
+        username: req.query['username']
       }).done(function (err, admin) {
         console.log(admin);
         if (err) {
@@ -43,7 +43,7 @@ module.exports = {
           return res.redirect('/login');
         } else {
           //密码错误处理
-          if (admin.password === req.body['password']) {
+          if (admin.password === req.query['password']) {
             //用户状态保存
             req.session['admin'] = admin;
             console.log(admin);
@@ -59,8 +59,8 @@ module.exports = {
       //4 如是普通用户登陆
       var loginMsg;
       var data = {
-        UserCode: req.body['username'],
-        UserPwd: req.body['password']
+        UserCode: req.query['username'],
+        UserPwd: req.query['password']
       };
       //4.1 先从数据库中直接查找数据库,如能查找到相应的记录,即对密码进行比较
       User.findOne({
@@ -103,7 +103,8 @@ module.exports = {
                       name: profile.name,
                       gender: profile.sex,
                       class: profile.class,
-                      dormNo: profile.dormitory
+                      dormNo: profile.dormitory,
+                      condition: false
                     }).done(function(err, user) {
                           if (err) {
                             console.log(err);

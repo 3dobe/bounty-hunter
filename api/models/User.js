@@ -24,6 +24,7 @@ module.exports = {
     dataInSchool : 'DATE',
     dormNo : 'string',
     email: 'email',
-    phone:  'string'
+    phone:  'string',
+    condition: 'boolean'//用于检测用户是否完善个人信息
   }
 };
