@@ -23,7 +23,7 @@ module.exports = {
   login: function (req, res) {
     //1 获取参数前端
     var option = req.body['option'];
-    //测试
+    //方便测试
     //var option = req.query['option'];
     //2判断为admin登陆 还是 普通用户登陆
     if (option === 'admin') {
@@ -54,6 +54,7 @@ module.exports = {
         }
       });
     }
+
     if (option === 'user') {
       //4 如是普通用户登陆
       var data = {
@@ -70,91 +71,124 @@ module.exports = {
         if (!user) {
           //4.2 数据中没有相应记录,则发送请求道学生服务子系统进行抓取,;
           var client = new Client('jwc.wyu.cn', '/student', 'gbk');
-          client.get('/', {}, {}, function () {
-            client.get('/createsession_a.asp', {}, {}, function () {
-              client.get('/createsession_b.asp', {}, {}, function () {
-                client.get('/rndnum.asp', {}, {}, function () {
-                  client.cookie['LogonNumber'] = '';
-                  client.post('/logon.asp', data, {
-                    Referer: 'http://jwc.wyu.cn/student/body.htm'
-                  }, function (err, res, body) {
-                    var success = /welcome/.test(body);
-                    if (success) {
-                      client.get('/f1.asp', {}, {}, function (err, res, body) {
-                        try {
-                          //4.2.1 抓取成功,保存数据到数据库,保存用户信息到session,转页
-                          var profile = parseProfile(body);
-                          User.create({
-                            id: profile.code,
-                            password: data.UserPwd,
-                            name: profile.name,
-                            gender: profile.sex,
-                            class: profile.class,
-                            dormNo: profile.dormitory
-                          }).done(function(err, user) {
-                            // Error handling
-                            if (err) {
-                              console.log(err);
-                            }else {
-                              //用户状态保存 转页
-                              console.log("User created:", user);
-                            }
-                          });
-                        } catch (err) {
-                          //4.2.2 抓取失败 返回错误信息,转页
-                          console.log(err);
-                          console.log('资料加载失败');
-                        }
-                      });
-                    } else {
-                      //4.2.2 抓取失败 返回错误信息,转页
-                      console.log('登录信息错误');
-                    }
-                  });
-                });
+          async.waterfall([
+            function(next) {
+              client.get('/createsession_a.asp', {}, {}, next(null));
+            }, function(next) {
+              client.get('/createsession_b.asp', {}, {}, next(null));
+            }, function(next) {
+              client.get('/rndnum.asp', {}, {}, next(null));
+            }, function(next) {
+              client.cookie['LogonNumber'] = '';
+              client.post('/logon.asp', data, {
+                Referer: 'http://jwc.wyu.cn/student/body.htm'
+              }, function (err, res, body) {
+                if(err) {
+                  next(new Error('登陆出错'));
+                } else {
+                  next(null, res, body);
+                }
               });
-            });
+            }, function(res, body, next) {
+              var success = /welcome/.test(body);
+              if (success) {
+                client.get('/f1.asp', {}, {}, function (err, res, body) {
+                  try {
+                    //4.2.1 抓取成功,保存数据到数据库,保存用户信息到session,转页
+                    var profile = parseProfile(body);
+                    User.create({
+                      id: profile.code,
+                      password: data.UserPwd,
+                      name: profile.name,
+                      gender: profile.sex,
+                      class: profile.class,
+                      dormNo: profile.dormitory
+                    }).done(function(err, user) {
+                          if (err) {
+                            console.log(err);
+                            next(new Error('新增数据出错'));
+                          }else {
+                            console.log("User created:", user);
+                            next(null, user);
+                          }
+                        });
+                  } catch (err) {
+                    //4.2.2 抓取失败 返回错误信息,转页
+                    console.log(err);
+                    next(new Error('资料加载失败'));
+                  }
+                });
+              } else {
+                next(new Error('登陆出错'));
+              }
+            }
+          ], function(err, user) {
+            if(err) {
+              console.log(err);
+            } else {
+              req.session['user'] = user;
+              return res.redirect('/');
+            }
           });
         } else {
           if(user.password !== data.UserPwd) {
             //4.1.1 如密码不匹配,则发送请求到学生服务子系统进行抓取,
             var client = new Client('jwc.wyu.cn', '/student', 'gbk');
-            client.get('/', {}, {}, function () {
-              client.get('/createsession_a.asp', {}, {}, function () {
-                client.get('/createsession_b.asp', {}, {}, function () {
-                  client.get('/rndnum.asp', {}, {}, function () {
-                    client.cookie['LogonNumber'] = '';
-                    client.post('/logon.asp', data, {
-                      Referer: 'http://jwc.wyu.cn/student/body.htm'
-                    }, function (err, res, body) {
-                      var success = /welcome/.test(body);
-                      if (success) {
-                        //4.1.1.1 抓取成功,更新数据到数据库,保存用户信息到session,转页
-                        user.password = data.UserPwd;
-                        user.save(function(err) {
-                          console.log(err);
-                        });
-                        //用户状态保存 转页
-                        console.log(user);
-                      } else {
-                        //4.1.1.2 抓取失败,返回失败消息,转页
-                        console.log('登录信息错误');
-                      }
-                    });
-                  });
+            async.waterfall([
+              function(next) {
+                client.get('/createsession_a.asp', {}, {}, next(null));
+              }, function(next) {
+                client.get('/createsession_b.asp', {}, {}, next(null));
+              }, function(next) {
+                client.get('/rndnum.asp', {}, {}, next(null));
+              }, function(next) {
+                client.cookie['LogonNumber'] = '';
+                client.post('/logon.asp', data, {
+                  Referer: 'http://jwc.wyu.cn/student/body.htm'
+                }, function (err, res, body) {
+                  if(err) {
+                    next(new Error('登陆出错'));
+                  } else {
+                    next(null, res, body);
+                  }
                 });
-              });
+              }, function(res, body, next) {
+                console.log(body);
+                var success = /welcome/.test(body);
+                if (success) {
+                  //4.1.1.1 抓取成功,更新数据到数据库,保存用户信息到session,转页
+                  user.password = data.UserPwd;
+                  user.save(function(err) {
+                    if(err) {
+                      console.log(err);
+                      next(new Error("更新出错"));
+                    } else {
+                      console.log(user);
+                      next(null, user);
+                    }
+                  });
+                } else {
+                  next(new Error('密码错误'));
+                }
+              }
+            ], function(err, user) {
+              if(err) {
+                console.log(err);
+              } else {
+                req.session['user'] = user;
+                return res.redirect('/');
+              }
             });
           } else {
             //4.1.2 密码匹配,保存用户信息到session,转页
             //用户状态保存 转页
+            req.session['user'] = user;
             console.log(user);
+            return res.redirect('/');
           }
         }
       });
-      return res.redirect('/');
     }
-
   },
 
   //登出操作
