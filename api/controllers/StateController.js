@@ -17,6 +17,7 @@
 
 var Client = require('../../assets/js/client');
 var parseProfile = require('../../assets/js/parseProfile');
+var userLogin = require('../../assets/js/userLogin');
 var async = require('async');
 module.exports = {
   //登陆操作
@@ -57,6 +58,7 @@ module.exports = {
 
     if (option === 'user') {
       //4 如是普通用户登陆
+      var loginMsg;
       var data = {
         UserCode: req.body['username'],
         UserPwd: req.body['password']
@@ -125,6 +127,7 @@ module.exports = {
           ], function(err, user) {
             if(err) {
               console.log(err);
+              return res.redirect('/');
             } else {
               req.session['user'] = user;
               return res.redirect('/');
@@ -174,6 +177,7 @@ module.exports = {
             ], function(err, user) {
               if(err) {
                 console.log(err);
+                return res.redirect('/');
               } else {
                 req.session['user'] = user;
                 return res.redirect('/');
@@ -193,8 +197,11 @@ module.exports = {
 
   //登出操作
   logout: function (req, res) {
-
+    if(req.session['admin']) {
+      delete req.session['admin'];
+    } else if(req.session['user']) {
+      delete req.session['user'];
+    }
+    return res.redirect('/');
   }
-
-
 };
