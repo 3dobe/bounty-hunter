@@ -17,7 +17,6 @@
 
 var Client = require('../../assets/js/client');
 var parseProfile = require('../../assets/js/parseProfile');
-var userLogin = require('../../assets/js/userLogin');
 var async = require('async');
 module.exports = {
   //登陆操作
