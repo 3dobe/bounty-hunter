@@ -16,7 +16,11 @@
  */
 
 module.exports = {
+  myTasksPublish : function(req, res) {
+    //用户发布的任务列表
+  },
 
-
-  
+  myTasksAccept : function(req, res) {
+    //用户接受的任务列表
+  }
 };

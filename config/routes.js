@@ -41,7 +41,7 @@ module.exports.routes = {
     view: 'home/login'
   },
 
-  /*测试*/
+  /*测试登陆*/
   'get /logintest': {
     controller: 'state',
     action:'login'
@@ -58,11 +58,32 @@ module.exports.routes = {
     action: 'logout'
   },
 
+  //测试登出
+  '/logout': {
+    controller: 'state',
+    action: 'logout'
+  },
+
   //发布任务页面
-  '/addtask':{
+  '/task/create': {
     view: 'home/addtask'
+  },
+
+  //获取用户'我'所发布的任务列表
+  'get /myTasksPublish': {
+    controller: 'task',
+    action: 'myTasksPublish'
+  },
+
+  //获取用户'我'所接受的任务列表
+  'get /myTasksAccept': {
+    controller: 'task',
+    action:'myTasksAccept'
   }
 
+
+
+  //
   /*
    // But what if you want your home page to display
    // a signup form located at `views/user/signup.ejs`?
