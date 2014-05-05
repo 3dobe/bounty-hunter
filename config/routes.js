@@ -79,8 +79,12 @@ module.exports.routes = {
   'get /myTasksAccept': {
     controller: 'task',
     action:'myTasksAccept'
-  }
+  },
 
+  'put /task/:id': {
+    controller: 'task',
+    action:'update'
+  }
 
 
   //

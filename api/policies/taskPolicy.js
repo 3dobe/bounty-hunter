@@ -3,11 +3,12 @@
  */
 module.exports = function(req, res, next) {
   console.log(req.target.action);
+  console.log(req.params['id']);
   //先判断是否为ajax请求
   if(req.isAjax) {
     if(req.target.action === 'find') {
       //获取任何用户都能看到的任务时 直接通过
-      next();
+      return next();
     }
     if (req.session['user']) {
       var user = req.session['user'];
@@ -31,12 +32,15 @@ module.exports = function(req, res, next) {
       } else if(action === 'update' || action === 'destroy') {
         //如是删除或跟新,则对task.publisherId属性与用户id属性进行比较
         console.log(4);
-        var id = req.body['id']
+        var id = req.params['id'];
+        console.log(id,4);
         Task.findOne(id).done(function(err, task) {
           if(err) {
-            res.forbidden(err.message);
+            return res.forbidden(err.message);
           }
-          if(task.publisherId === user.id) {
+          if(!task) {
+            return res.forbidden('没有该任务');
+          }else if(task.publisherId === user.id) {
             //确认该任务为该用户发布,通过请求
             next();
           } else {

@@ -9,7 +9,7 @@ form(method='post', action='/task')
     button(type='submit') 提交
 
 h3 测试put更新
-form(formmethod='put', action='/task')
+form(formmethod='put', action='/task/13')
     label title
     input(type='text', name='title')
     br
@@ -19,7 +19,7 @@ form(formmethod='put', action='/task')
     button(type='submit') 提交
 
 h3 测试delete删除
-form(formmethod='delete', action='/task/12')
+form(formmethod='delete', action='/task/destroy/13')
     label title
     input(type='text', name='title')
     br
