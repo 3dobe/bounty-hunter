@@ -8,23 +8,17 @@ form(method='post', action='/task')
     br
     button(type='submit') 提交
 
-h3 测试put更新
-form(formmethod='put', action='/task/13')
+h3 test form method put
+form(formmethod='put', action='/task/14')
     label title
     input(type='text', name='title')
     br
     label descp
     input(type='textarea', name='descp')
     br
-    button(type='submit') 提交
+    button(type='submit') submit
 
-h3 测试delete删除
-form(formmethod='delete', action='/task/destroy/13')
-    label title
-    input(type='text', name='title')
-    br
-    label descp
-    input(type='textarea', name='descp')
-    br
-    button(type='submit') 提交
+h3 test form method delete
+form(formmethod='delete', action='/task/14')
+    button(type='submit') submit
 

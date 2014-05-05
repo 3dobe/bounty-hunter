@@ -80,11 +80,21 @@ module.exports.routes = {
     controller: 'task',
     action:'myTasksAccept'
   },
+  'get /user/:id?': {
+    controller: 'task',
+    action: 'find'
+  },
 
   'put /task/:id': {
     controller: 'task',
     action:'update'
+  },
+
+  'delete /user/:id': {
+    controller: 'task',
+    action: 'destroy'
   }
+
 
 
   //

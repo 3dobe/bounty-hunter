@@ -2,10 +2,11 @@
  * Created by Administrator on 14-5-5.
  */
 module.exports = function(req, res, next) {
+  console.log(req);
   console.log(req.target.action);
   console.log(req.params['id']);
   //先判断是否为ajax请求
-  if(req.isAjax) {
+  //if(req.isAjax) {
     if(req.target.action === 'find') {
       //获取任何用户都能看到的任务时 直接通过
       return next();
@@ -52,6 +53,6 @@ module.exports = function(req, res, next) {
     } else {
       return res.forbidden('请先登录');
     }
-  }
+  //}
   return res.forbidden('You are not permitted to perform this action.');
 };
