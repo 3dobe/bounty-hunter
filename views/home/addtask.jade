@@ -18,3 +18,13 @@ form(formmethod='put', action='/task')
     br
     button(type='submit') 提交
 
+h3 测试delete删除
+form(formmethod='delete', action='/task/12')
+    label title
+    input(type='text', name='title')
+    br
+    label descp
+    input(type='textarea', name='descp')
+    br
+    button(type='submit') 提交
+
