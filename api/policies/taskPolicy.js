@@ -2,7 +2,6 @@
  * Created by Administrator on 14-5-5.
  */
 module.exports = function(req, res, next) {
-  console.log(req);
   console.log(req.target.action);
   console.log(req.params['id']);
   //先判断是否为ajax请求
@@ -36,16 +35,19 @@ module.exports = function(req, res, next) {
         var id = req.params['id'];
         console.log(id,4);
         Task.findOne(id).done(function(err, task) {
+          console.log(task);
           if(err) {
+            console.log(1111);
             return res.forbidden(err.message);
           }
           if(!task) {
             return res.forbidden('没有该任务');
-          }else if(task.publisherId === user.id) {
+          } else if(task.publisherId === user.id) {
             //确认该任务为该用户发布,通过请求
-            next();
+            console.log('logined');
+            return;
           } else {
-            res.forbidden('你无权对该任务进行操作');
+            return res.forbidden('你无权对该任务进行操作');
           }
         });
         return next();
@@ -54,5 +56,6 @@ module.exports = function(req, res, next) {
       return res.forbidden('请先登录');
     }
   //}
+  return next();
   return res.forbidden('You are not permitted to perform this action.');
 };

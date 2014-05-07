@@ -9,16 +9,18 @@ form(method='post', action='/task')
     button(type='submit') 提交
 
 h3 test form method put
-form(formmethod='put', action='/task/14')
+form(method='post', action='/task/16')
     label title
     input(type='text', name='title')
     br
     label descp
     input(type='textarea', name='descp')
     br
+    input(type='hidden', name='_method', value='put')
     button(type='submit') submit
 
 h3 test form method delete
-form(formmethod='delete', action='/task/14')
+form(method='post', action='/task/15')
+    input(type='hidden', name='_method', value='delete')
     button(type='submit') submit
 

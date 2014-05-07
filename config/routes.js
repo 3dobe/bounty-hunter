@@ -79,7 +79,7 @@ module.exports.routes = {
   'get /myTasksAccept': {
     controller: 'task',
     action:'myTasksAccept'
-  },
+  }/*,
   'get /user/:id?': {
     controller: 'task',
     action: 'find'
@@ -93,7 +93,7 @@ module.exports.routes = {
   'delete /user/:id': {
     controller: 'task',
     action: 'destroy'
-  }
+  }*/
 
 
 
