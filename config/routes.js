@@ -79,21 +79,31 @@ module.exports.routes = {
   'get /myTasksAccept': {
     controller: 'task',
     action:'myTasksAccept'
-  }/*,
+  },
+
+  //获取所有或单一任务
   'get /user/:id?': {
     controller: 'task',
     action: 'find'
   },
 
+  //添加任务
+  'post /user': {
+    controller: 'task',
+    action: 'create'
+  },
+
+  //更新任务
   'put /task/:id': {
     controller: 'task',
     action:'update'
   },
 
+  //删除任务
   'delete /user/:id': {
     controller: 'task',
     action: 'destroy'
-  }*/
+  }
 
 
 
