@@ -1,3 +1,6 @@
+//
+   Created by Administrator on 14-5-8.
+
 h3 测试post添加
 form(method='post', action='/task')
     label title
@@ -7,7 +10,6 @@ form(method='post', action='/task')
     input(type='textarea', name='descp')
     br
     button(type='submit') 提交
-
 h3 test form method put
 form(method='post', action='/task/16')
     label title
@@ -18,9 +20,7 @@ form(method='post', action='/task/16')
     br
     input(type='hidden', name='_method', value='put')
     button(type='submit') submit
-
 h3 test form method delete
 form(method='post', action='/task/15')
     input(type='hidden', name='_method', value='delete')
     button(type='submit') submit
-

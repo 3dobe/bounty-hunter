@@ -64,15 +64,15 @@ module.exports.routes = {
     action: 'logout'
   },
 
-  //发布任务页面
-  '/task/create': {
-    view: 'home/addtask'
+  /*任务模块*/
+  //任务详情页
+  '/task/view/:id': {
+    view: 'task/taskview'
   },
 
-  //获取用户'我'所发布的任务列表
-  'get /myTasksPublish': {
-    controller: 'task',
-    action: 'myTasksPublish'
+  //添加任务页
+  '/task/create': {
+    view: 'task/addtask'
   },
 
   //获取用户'我'所接受的任务列表
@@ -82,13 +82,13 @@ module.exports.routes = {
   },
 
   //获取所有或单一任务
-  'get /user/:id?': {
+  'get /task/:id?': {
     controller: 'task',
     action: 'find'
   },
 
   //添加任务
-  'post /user': {
+  'post /task': {
     controller: 'task',
     action: 'create'
   },
@@ -103,8 +103,25 @@ module.exports.routes = {
   'delete /user/:id': {
     controller: 'task',
     action: 'destroy'
-  }
+  },
 
+  //获取用户'我'所发布的任务列表
+  'get /myTasksPublish': {
+    controller: 'task',
+    action: 'myTasksPublish'
+  },
+
+  //接受任务
+  'put /acceptTask': {
+    controller: 'task',
+    action: 'acceptTask'
+  },
+
+  //完成任务
+  'put /fulfilTask': {
+    controller: 'task',
+    action: 'fulfilTask'
+  }
 
 
   //
