@@ -22,5 +22,13 @@ module.exports = {
 
   myTasksAccept : function(req, res) {
     //用户接受的任务列表
+  },
+
+  acceptTask : function(req, res) {
+    //用户接受任务
+  },
+
+  fulfilTask : function(req, res) {
+    //完成任务
   }
 };

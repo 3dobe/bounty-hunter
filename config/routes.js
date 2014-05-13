@@ -41,14 +41,13 @@ module.exports.routes = {
     view: 'home/login'
   },
 
-  /*测试登陆*/
-  'get /logintest': {
-    controller: 'state',
-    action:'login'
+  //测试用登录页
+  '/logintest': {
+    view: 'home/loginTest'
   },
 
   /*用户登陆与登出*/
-  'post /login': {
+  'post /do/login': {
     controller: 'state',
     action: 'login'
   },

@@ -27,7 +27,7 @@ module.exports.controllers = {
    *
    * It's important to realize that, even if you haven't defined these yourself, as long as
    * a model exists with the same name as the controller, Sails will respond with built-in CRUD
-   * logic in the form of a JSON API, including support for sort, pagination, and filtering.
+   * logic in the form of a JSON ,, including support for sort, pagination, and filtering.
   */
   blueprints: {
 

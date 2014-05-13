@@ -19,12 +19,15 @@ module.exports.policies = {
  // '*': true,
 
   StateController: {
+    login : 'loginPolicy',
     logout : 'logoutPolicy'
   },
 
   TaskController: {
     '*': 'taskPolicy'
   }
+
+
   /*
 	// Here's an example of adding some policies to a controller
 	RabbitController: {
