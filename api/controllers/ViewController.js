@@ -16,7 +16,11 @@
  */
 
 module.exports = {
-  //控制页面访问权限
-
-  
+  loginView: function(req, res) {
+    if(req.session['admin'] || req.session['user']) {
+      return res.redirect('/');
+    } else {
+      return res.redirect('/login')
+    }
+  }
 };

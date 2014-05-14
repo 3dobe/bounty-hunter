@@ -18,7 +18,6 @@
 var Client = require('../../assets/js/client');
 var parseProfile = require('../../assets/js/parseProfile');
 var async = require('async');
-var crypto = require('crypto');
 module.exports = {
   //登陆操作
   login: function (req, res) {
@@ -198,5 +197,19 @@ module.exports = {
       delete req.session['user'];
     }
     return res.redirect('/');
+  },
+
+  info : function(req, res) {
+    //返回渲染个人信息页
+    if(req.session['admin']) {
+      res.view({
+        admin: req.session['admin']
+      });
+    }
+    if(req.session['user']) {
+      res.view({
+        user: req.session['user']
+      });
+    }
   }
 };

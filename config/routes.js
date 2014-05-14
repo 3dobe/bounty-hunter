@@ -38,12 +38,14 @@ module.exports.routes = {
 
   //登陆页
   '/login': {
-    view: 'home/login'
+    controllers: 'view',
+    acion: 'loginView'
   },
 
-  //测试用登录页
-  '/logintest': {
-    view: 'home/loginTest'
+  //个人信息
+  '/info' : {
+    controller: 'state',
+    action: 'info'
   },
 
   /*用户登陆与登出*/
@@ -52,7 +54,7 @@ module.exports.routes = {
     action: 'login'
   },
 
-  'post /logout': {
+  'post /do/logout': {
     controller: 'state',
     action: 'logout'
   },
