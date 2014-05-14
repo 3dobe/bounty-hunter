@@ -21,7 +21,6 @@ var async = require('async');
 module.exports = {
   //登陆操作
   login: function (req, res) {
-    console.log(111111);
     //1 获取参数前端
     var option = req.body['option'];
 
@@ -103,8 +102,7 @@ module.exports = {
                     name: profile.name,
                     gender: profile.sex,
                     class: profile.class,
-                    dormNo: profile.dormitory,
-                    condition: false
+                    dormNo: profile.dormitory
                   }).done(function (err, user) {
                         if (err) {
                           console.log(err);
