@@ -1,0 +1,15 @@
+h3 测试登录
+form(method='post', action='/do/login')
+    label username
+    input(type='text', name='username')
+    br
+    label password
+    input(type='password', name='password')
+    br
+    label admin
+    input(type='radio', name='option', value='admin')
+    br
+    label user
+    input(type='radio', name='option', value='user')
+    br
+    button(type='submit') 提交
