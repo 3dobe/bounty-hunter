@@ -36,16 +36,22 @@ module.exports.routes = {
     view: 'home/index'
   },
 
-  //登陆页
+  //登陆页控制器
   '/login': {
-    controllers: 'view',
-    acion: 'loginView'
+    controller: 'view',
+    action: 'loginView'
   },
 
   //个人信息
   '/info' : {
+    controller: 'view',
+    action: 'infoView'
+  },
+
+  //修改个人信息
+  'post /modiInfo' : {
     controller: 'state',
-    action: 'info'
+    action: 'modiInfo'
   },
 
   /*用户登陆与登出*/
