@@ -9,25 +9,23 @@ html
     link(rel="stylesheet", href="/styles/cnode.css")
 
     block styles
+      style.
+        .form-actions:before,
+        .form-actions:after { display: none !important; }
 
   body
 
     .navbar
       .navbar-inner
         .container
-          a.brand(href='/')
-            img(src='/public/images/logo.png', title='Node.js专业中文社区')
-          form#search_form.navbar-search(action='/search')
-            input#q.search-query.span3(type='text', name='q', value='')
+          ul.nav
+            li
+              a(href='/') 赏金猎人
           ul.nav.pull-right
             li
               a(href='/') 首页
             li
-              a(href='https://github.com/cnodejs/nodeclub/wiki/') Wiki
-            li
-              a(href='/signup') 注册
-            li
-              a(href='/signin') 登录
+              a(href='/login') 登录
           a#responsive-sidebar-trigger.btn.btn-navbar
             span.icon-bar
             span.icon-bar
@@ -35,18 +33,75 @@ html
 
     #main
       #sidebar
+        div.panel
+          div.header
+            span.col_fade 闲置任务
+          div.inner
+            ul.unstyled
+              li
+                div
+                  a.dark.topic_title(href='/topic/5371f3006c25575b3b011799', title='【推荐阅读】在PayPal改善Node.js的SSL的性能') 【推荐阅读】在PayPal改善Node.js的SSL的性能
+              li
+                div
+                  a.dark.topic_title(href='/topic/5371792e4bc6e1af3703dae1', title='Lynda. Node.js Essential Training 别看书了,来个视频教程吧') Lynda. Node.js Essential Training 别看书了,来个视频教程吧
+              li
+                div
+                  a.dark.topic_title(href='/topic/5370d52e98a656472a07c172', title='新人请教个node上传的问题') 新人请教个node上传的问题
+              li
+                div
+                  a.dark.topic_title(href='/topic/5370c65c160e1cbc2b00c7f6', title='最近做的一个爬虫，功能比较全面') 最近做的一个爬虫，功能比较全面
+              li
+                div
+                  a.dark.topic_title(href='/topic/5370859c1c0729ee1f00b968', title='【推荐阅读】 快乐Node码农的十个习惯') 【推荐阅读】 快乐Node码农的十个习惯
         .panel
           .header
-            span.col_fade 关于
+            span.col_fade 排行榜 TOP 10
           .inner
-            p CNode：Node.js专业中文社区
-            p 在这里你可以：
-            ul
-              li 向别人提出你遇到的问题
-              li 帮助遇到问题的人
-              li 分享自己的知识
-              li 和其它人一起进步
-      block body
+            ol
+              li
+                span.top_score 6375
+                span.user_name
+                  a(href='/user/jiyinyiyong') jiyinyiyong
+              li
+                span.top_score 2795
+                span.user_name
+                  a(href='/user/youxiachai') youxiachai
+              li
+                span.top_score 2610
+                span.user_name
+                  a(href='/user/leapon') leapon
+              li
+                span.top_score 2235
+                span.user_name
+                  a(href='/user/a272121742') a272121742
+              li
+                span.top_score 2160
+                span.user_name
+                  a(href='/user/leizongmin') leizongmin
+              li
+                span.top_score 2140
+                span.user_name
+                  a(href='/user/suqian') suqian
+              li
+                span.top_score 1695
+                span.user_name
+                  a(href='/user/panawang') panawang
+              li
+                span.top_score 1340
+                span.user_name
+                  a(href='/user/saighost') saighost
+              li
+                span.top_score 1325
+                span.user_name
+                  a(href='/user/yakczh') yakczh
+              li
+                span.top_score 1300
+                span.user_name
+                  a(href='/user/snoopy') snoopy
+
+
+      #content
+        block body
 
     // A few key dependencies, linked in order
 
