@@ -197,17 +197,7 @@ module.exports = {
     return res.redirect('/');
   },
 
-  info : function(req, res) {
-    //返回渲染个人信息页
-    if(req.session['admin']) {
-      res.view({
-        admin: req.session['admin']
-      });
-    }
-    if(req.session['user']) {
-      res.view({
-        user: req.session['user']
-      });
-    }
+  modiInfo : function(req, res) {
+
   }
 };

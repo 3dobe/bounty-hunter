@@ -16,11 +16,20 @@
  */
 
 module.exports = {
-  loginView: function(req, res) {
-    if(req.session['admin'] || req.session['user']) {
+  loginView : function(req, res) {
+    if(req.session['user'] || req.session['admin']) {
       return res.redirect('/');
     } else {
-      return res.redirect('/login')
+      return res.view('home/login');
+    }
+  },
+
+  infoView : function(req, res) {
+    //返回渲染个人信息页
+    if(req.session['user']) {
+      res.view('home/info', {
+        user: req.session['user']
+      });
     }
   }
 };

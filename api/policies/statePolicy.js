@@ -2,7 +2,14 @@
  * Created by Administrator on 14-5-5.
  */
 module.exports = function(req, res, next) {
-  console.log('登出测试');
+  if(req.target.action === 'info') {
+    if(req.session['admin']) {
+      return res.forbidden('You are not permitted to perform this action.');
+    }
+    if(req.session['user']) {
+      return next();
+    }
+  }
   if (req.session['admin'] || req.session['user']) {
     return next();
   }

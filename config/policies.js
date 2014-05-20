@@ -20,7 +20,9 @@ module.exports.policies = {
 
   StateController: {
     login : 'loginPolicy',
-    logout : 'logoutPolicy'
+    logout : 'statePolicy',
+    info : 'statePolicy',
+    modiInfo : 'statePolicy'
   },
 
   TaskController: {

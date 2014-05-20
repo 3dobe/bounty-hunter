@@ -2,7 +2,6 @@
  * Created by Administrator on 14-5-13.
  */
 module.exports = function(req, res, next) {
-  console.log(000);
   if(req.session['admin'] || req.session['user']) {
     return res.forbidden('你已登录,别闹了');
   }
