@@ -21,5 +21,14 @@ block body
             label.control-label 密码
             .controls
               input.input-xlarge(name='password', size='30', type='password')
+          .control-group
+            label.control-label 身份
+            .controls
+              label
+                input.input-xlarge(checked, name='option', type='radio', value='user')
+                | 用户
+              label
+                input.input-xlarge(name='option', type='radio', value='admin')
+                | 管理员
           .form-actions
             input.btn(type='submit', value='登录')
