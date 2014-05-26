@@ -9,9 +9,15 @@ html
     link(rel="stylesheet", href="/styles/cnode.css")
 
     block styles
+
       style.
         .form-actions:before,
         .form-actions:after { display: none !important; }
+        #responsive-sidebar-trigger { display: none !important; }
+        .nav.pull-right { float: right !important; clear: none !important; }
+        input[readonly] { background-color: #f7f7f7; }
+        #main { margin-bottom: 40px; }
+
     script(type="text/javascript", src="/js/jquery.js")
 
   body
@@ -24,8 +30,6 @@ html
               a(href='/') 赏金猎人
           ul.nav.pull-right
             li
-              a(href='/') 首页
-            li
               a(href='/login') 登录
           a#responsive-sidebar-trigger.btn.btn-navbar
             span.icon-bar
@@ -34,26 +38,48 @@ html
 
     #main
       #sidebar
-        div.panel
-          div.header
+        .panel
+          .header
+            span.col_fade 个人信息
+          .inner
+            .user_card
+              div
+                a.user_avatar(href='/user/fritx')
+                  img(src='https://avatars.githubusercontent.com/u/6647633?', title='fritx')
+                span.user_name
+                  a.dark(href='/user/fritx') fritx
+                .board.clearfix
+                  .floor
+                    a(href='/user/fritx/collections')
+                      span.big 3
+                      | 话题收藏
+                  .floor
+                    a(href='/user/fritx/following')
+                      span.big 4
+                      | 关注
+                    .space
+                    a(href='/user/fritx/follower')
+                      span.big 0
+                      | 粉丝
+                    .space
+                    span.big 60
+                    | 积分
+
+        .panel
+          .header
             span.col_fade 闲置任务
-          div.inner
-            ul.unstyled
+          .inner
+            ul
               li
-                div
-                  a.dark.topic_title(href='/topic/5371f3006c25575b3b011799', title='【推荐阅读】在PayPal改善Node.js的SSL的性能') 【推荐阅读】在PayPal改善Node.js的SSL的性能
+                a(href='/topic/5371f3006c25575b3b011799', title='【推荐阅读】在PayPal改善Node.js的SSL的性能') 【推荐阅读】在PayPal改善Node.js的SSL的性能
               li
-                div
-                  a.dark.topic_title(href='/topic/5371792e4bc6e1af3703dae1', title='Lynda. Node.js Essential Training 别看书了,来个视频教程吧') Lynda. Node.js Essential Training 别看书了,来个视频教程吧
+                a(href='/topic/5371792e4bc6e1af3703dae1', title='Lynda. Node.js Essential Training 别看书了,来个视频教程吧') Lynda. Node.js Essential Training 别看书了,来个视频教程吧
               li
-                div
-                  a.dark.topic_title(href='/topic/5370d52e98a656472a07c172', title='新人请教个node上传的问题') 新人请教个node上传的问题
+                a(href='/topic/5370d52e98a656472a07c172', title='新人请教个node上传的问题') 新人请教个node上传的问题
               li
-                div
-                  a.dark.topic_title(href='/topic/5370c65c160e1cbc2b00c7f6', title='最近做的一个爬虫，功能比较全面') 最近做的一个爬虫，功能比较全面
+                a(href='/topic/5370c65c160e1cbc2b00c7f6', title='最近做的一个爬虫，功能比较全面') 最近做的一个爬虫，功能比较全面
               li
-                div
-                  a.dark.topic_title(href='/topic/5370859c1c0729ee1f00b968', title='【推荐阅读】 快乐Node码农的十个习惯') 【推荐阅读】 快乐Node码农的十个习惯
+                a(href='/topic/5370859c1c0729ee1f00b968', title='【推荐阅读】 快乐Node码农的十个习惯') 【推荐阅读】 快乐Node码农的十个习惯
         .panel
           .header
             span.col_fade 排行榜 TOP 10
