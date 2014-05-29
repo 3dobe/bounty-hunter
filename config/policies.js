@@ -21,7 +21,6 @@ module.exports.policies = {
   StateController: {
     login : 'loginPolicy',
     logout : 'statePolicy',
-    info : 'statePolicy',
     modiInfo : 'statePolicy'
   },
 

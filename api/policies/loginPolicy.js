@@ -17,6 +17,7 @@ module.exports = function(req, res, next) {
       }
       if(!user) {
         //没有相应用户时向req添加添加noUser标识值,并设为true
+        console.log(222);
         req.body['noUser'] = true;
         return next();
       } else {

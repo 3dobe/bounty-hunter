@@ -24,6 +24,10 @@ module.exports = {
       type: 'string',
       required: true
     },
-    accepterId: 'string'
+    accepterId: 'string',
+    isFinish: {
+      type: 'boolean',
+      defaultsTo: false
+    }
   }
 };

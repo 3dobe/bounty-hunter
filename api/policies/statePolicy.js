@@ -2,7 +2,7 @@
  * Created by Administrator on 14-5-5.
  */
 module.exports = function(req, res, next) {
-  if(req.target.action === 'info') {
+  if(req.target.action === 'modiInfo') {
     if(req.session['admin']) {
       return res.forbidden('You are not permitted to perform this action.');
     }

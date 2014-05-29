@@ -73,6 +73,10 @@ module.exports.routes = {
 
   /*任务模块*/
   //任务详情页
+  '/task/view': {
+    view: 'task/taskview'
+  },
+
   '/task/view/:id': {
     view: 'task/taskview'
   },

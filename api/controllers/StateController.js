@@ -60,7 +60,7 @@ module.exports = {
         UserCode: req.body['username'],
         UserPwd: req.body['password']
       };
-
+      console.log(data);
       //如果已经匹配成功,直接转页
       if (req.session['user']) {
         //直接转页
@@ -68,6 +68,7 @@ module.exports = {
       }
 
       //数据库中没有相应用户
+      console.log(req.body['noUser']);
       if (req.body['noUser']) {
         //4.2 数据中没有相应记录,则发送请求道学生服务子系统进行抓取,;
         var client = new Client('jwc.wyu.cn', '/student', 'gbk');
@@ -84,6 +85,7 @@ module.exports = {
               Referer: 'http://jwc.wyu.cn/student/body.htm'
             }, function (err, res, body) {
               if (err) {
+                console.log(err.message);
                 next(new Error('登陆出错'));
               } else {
                 next(null, res, body);
@@ -91,6 +93,7 @@ module.exports = {
             });
           }, function (res, body, next) {
             var success = /welcome/.test(body);
+            console.log(body);
             if (success) {
               client.get('/f1.asp', {}, {}, function (err, res, body) {
                 try {
@@ -105,7 +108,7 @@ module.exports = {
                     dormNo: profile.dormitory
                   }).done(function (err, user) {
                         if (err) {
-                          console.log(err);
+                          console.log(err.message);
                           next(new Error('新增数据出错'));
                         } else {
                           console.log("User created:", user);
@@ -124,8 +127,8 @@ module.exports = {
           }
         ], function (err, user) {
           if (err) {
-            console.log(err);
-            return res.redirect('/');
+            console.log(err.message);
+            return res.view('home/login');
           } else {
             req.session['user'] = user;
             return res.redirect('/');
@@ -150,6 +153,7 @@ module.exports = {
               Referer: 'http://jwc.wyu.cn/student/body.htm'
             }, function (err, res, body) {
               if (err) {
+                console.log(err.message);
                 next(new Error('登陆出错'));
               } else {
                 next(null, res, body);
@@ -176,8 +180,8 @@ module.exports = {
           }
         ], function (err, user) {
           if (err) {
-            console.log(err);
-            return res.redirect('/');
+            console.log(err.message);
+            return res.view('home/login');
           } else {
             req.session['user'] = user;
             return res.redirect('/');
