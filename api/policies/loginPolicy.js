@@ -1,6 +1,8 @@
 /**
  * Created by Administrator on 14-5-13.
  */
+var crypto = require('crypto');
+
 module.exports = function(req, res, next) {
   if(req.session['admin'] || req.session['user']) {
     return res.forbidden('你已登录,别闹了');
@@ -23,7 +25,9 @@ module.exports = function(req, res, next) {
       } else {
         //有相应用户时将noUser标识值设为false
         req.body['noUser'] = false;
-        if(user.password !== req.body['password']) {
+        req.body['password'] = crypto.createHash('md5')
+            .update(req.body['password']).digest('hex');
+        if(user.password != req.body['password']) {
           //密码不匹配,添加wrongPw标识值,设为true
           req.body['wrongPw'] = true;
           return next();

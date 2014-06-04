@@ -108,7 +108,7 @@ module.exports = {
                     dormNo: profile.dormitory
                   }).done(function (err, user) {
                         if (err) {
-                          console.log(err.message);
+                          console.log(err);
                           next(new Error('新增数据出错'));
                         } else {
                           console.log("User created:", user);

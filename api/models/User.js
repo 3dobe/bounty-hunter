@@ -5,6 +5,7 @@
  * @description :: A short summary of how this model works and what it represents.
  * @docs		:: http://sailsjs.org/#!documentation/models
  */
+var crypto = require('crypto');
 
 module.exports = {
 
@@ -17,7 +18,6 @@ module.exports = {
     name : 'string',
     gender : 'string',
     class : 'string',
-    dataInSchool : 'DATE',
     dormNo : 'string',
     email: 'email',
     phone:  'string',
@@ -25,5 +25,12 @@ module.exports = {
       type: 'boolean',
       defaultsTo: false
     }//用于检测用户是否完善个人信息
+  },
+
+  beforeCreate: function(user, next) {
+    str = user.password;
+    user.password = crypto.createHash('md5')
+        .update(str).digest('hex');
+    next();
   }
 };
