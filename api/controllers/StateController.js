@@ -39,6 +39,7 @@ module.exports = {
             }
             if (!admin) {
               //登陆信息错误处理
+              res.cookie('msg', '账号错误');
               return res.redirect('/login');
             } else {
               //密码错误处理
@@ -46,8 +47,10 @@ module.exports = {
                 //用户状态保存
                 req.session['admin'] = admin;
                 console.log(admin);
+                res.cookie('msg', '登陆成功');
                 return res.redirect('/');
               } else {
+                res.cookie('msg', '密码错误');
                 return res.redirect('/login');
               }
             }
@@ -60,10 +63,10 @@ module.exports = {
         UserCode: req.body['username'],
         UserPwd: req.body['password']
       };
-      console.log(data);
       //如果已经匹配成功,直接转页
       if (req.session['user']) {
         //直接转页
+        res.cookie('msg', '成功登陆');
         return res.redirect('/');
       }
 
@@ -84,8 +87,9 @@ module.exports = {
             client.post('/logon.asp', data, {
               Referer: 'http://jwc.wyu.cn/student/body.htm'
             }, function (err, res, body) {
+              console.log(body);
               if (err) {
-                console.log(err.message);
+                console.log(err);
                 next(new Error('登陆出错'));
               } else {
                 next(null, res, body);
@@ -127,10 +131,11 @@ module.exports = {
           }
         ], function (err, user) {
           if (err) {
-            console.log(err.message);
-            return res.view('home/login');
+            res.cookie('msg', err.message);
+            return res.redirect('/login');
           } else {
             req.session['user'] = user;
+            res.cookie('msg', '成功登陆');
             return res.redirect('/');
           }
         });
@@ -164,7 +169,7 @@ module.exports = {
             var success = /welcome/.test(body);
             if (success) {
               //4.1.1.1 抓取成功,更新数据到数据库,保存用户信息到session,转页
-              user.password = data.UserPwd;
+              user.password = req.body['encryptPw'];
               user.save(function (err) {
                 if (err) {
                   console.log(err);
@@ -180,10 +185,11 @@ module.exports = {
           }
         ], function (err, user) {
           if (err) {
-            console.log(err.message);
-            return res.view('home/login');
+            res.cookie('msg', err.message);
+            return res.redirect('/login');
           } else {
             req.session['user'] = user;
+            res.cookie('msg', '成功登陆');
             return res.redirect('/');
           }
         });
@@ -202,6 +208,53 @@ module.exports = {
   },
 
   modiInfo : function(req, res) {
-
+    var phone = req.body['phone'];
+    var email = req.body['email'];
+    console.log(phone , email);
+    var id = req.session['user'].id;
+    if(phone && email) {
+      User.findOne({
+        id : id
+      }).done(function(err, user) {
+        if(err) {
+          console.log(err);
+        }
+        if(!user) {
+          return res.send({ msg : 'no user'});
+        } else {
+          user.phone = phone;
+          user.email = email;
+          user.condition = true;
+          user.save(function(err) {
+            if(err) {
+              console.log(err);
+              res.cookie('msg','更新出错');
+              return res.redirect('/info');
+            }
+            req.session['user'] = user;
+            res.cookie('msg','更新成功');
+            return res.redirect('/info');
+          });
+        }
+      });
+    } else if(phone || email) {
+      User.findOne({
+        id: id
+      }).done(function(err, user) {
+        user.phone = phone;
+        user.email = email;
+        user.condition = false;
+        user.save(function(err) {
+          if(err) {
+            console.log(err);
+            res.cookie('msg','更新出错');
+            return res.redirect('/info');
+          }
+          req.session['user'] = user;
+          res.cookie('msg','更新成功');
+          return res.redirect('/info');
+        });
+      });
+    }
   }
 };

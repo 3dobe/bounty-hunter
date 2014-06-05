@@ -30,6 +30,8 @@ module.exports = {
       res.view('home/info', {
         user: req.session['user']
       });
+    } else {
+      return res.redirect('/');
     }
   }
 };

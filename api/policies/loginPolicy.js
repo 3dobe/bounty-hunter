@@ -30,6 +30,8 @@ module.exports = function(req, res, next) {
         if(user.password != req.body['password']) {
           //密码不匹配,添加wrongPw标识值,设为true
           req.body['wrongPw'] = true;
+          req.body['encryptPw'] = crypto.createHash('md5')
+              .update(req.body['password']).digest('hex');
           return next();
         } else {
           //密码匹配.直接设值到session,通过请求给controller进行转页
