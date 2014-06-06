@@ -139,8 +139,14 @@ module.exports.routes = {
   'put /accuseTask': {
     controller: 'task',
     action: 'accuseTask'
-  }
+  },
 
+  /*管理员模块*/
+  //添加管理员
+  'put /addAdmin': {
+    controller: 'manage',
+    action: 'addAdmin'
+  }
 
   //
   /*

@@ -201,8 +201,12 @@ module.exports = {
   logout: function (req, res) {
     if (req.session['admin']) {
       delete req.session['admin'];
+      res.cookie('msg', '退出成功');
     } else if (req.session['user']) {
       delete req.session['user'];
+      res.cookie('msg', '退出成功');
+    } else {
+      res.cookie('msg', '没登录,怎么登出?')
     }
     return res.redirect('/');
   },
