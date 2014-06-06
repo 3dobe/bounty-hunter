@@ -28,6 +28,10 @@ module.exports = {
     isFinish: {
       type: 'boolean',
       defaultsTo: false
+    },
+    accuse: {
+      type: 'boolean',
+      defaultsTo: false
     }
   }
 };

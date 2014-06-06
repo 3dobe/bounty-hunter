@@ -30,8 +30,12 @@ module.exports = {
       res.view('home/info', {
         user: req.session['user']
       });
-    } else {
+    } else if(req.session['admin']) {
+      res.cookie('msg', '别闹了管理员先生');
       return res.redirect('/');
+    } else {
+      res.cookie('msg', '用户请先登录');
+      return res.redirect('/login');
     }
   }
 };

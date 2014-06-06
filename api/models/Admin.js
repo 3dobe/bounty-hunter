@@ -10,8 +10,11 @@ module.exports = {
   schema: true,
   tableName : 'admins',
   attributes: {
-    id : 'integer',
     username : 'string',
-    password : 'string'
+    password : 'string',
+    isSuper : {
+      type : 'boolean',
+      defaultsTo : false
+    }
   }
 };

@@ -4,7 +4,8 @@
 module.exports = function(req, res, next) {
   if(req.target.action === 'modiInfo') {
     if(req.session['admin']) {
-      return res.forbidden('You are not permitted to perform this action.');
+      res.cookie('msg', '别闹了,管理员先生');
+      return res.redirect('/');
     }
     if(req.session['user']) {
       return next();
@@ -13,5 +14,6 @@ module.exports = function(req, res, next) {
   if (req.session['admin'] || req.session['user']) {
     return next();
   }
-  return res.forbidden('You are not permitted to perform this action.');
+  res.cookie('msg', '操作出错');
+  return res.redirect('/');
 };

@@ -5,7 +5,8 @@ var crypto = require('crypto');
 
 module.exports = function(req, res, next) {
   if(req.session['admin'] || req.session['user']) {
-    return res.forbidden('你已登录,别闹了');
+    res.cookie('msg', '你已登录,别闹了');
+    return res.redirect('/');
   }
   if(req.body['option'] === 'admin') {
     return next();
@@ -15,11 +16,11 @@ module.exports = function(req, res, next) {
     }).done(function(err, user) {
       if(err) {
         //错误直接拒绝请求
-        return res.forbidden(err.message);
+        res.cookie('msg', err.message);
+        return res.redirect('/login');
       }
       if(!user) {
         //没有相应用户时向req添加添加noUser标识值,并设为true
-        console.log(222);
         req.body['noUser'] = true;
         return next();
       } else {
@@ -41,7 +42,7 @@ module.exports = function(req, res, next) {
       }
     });
   } else {
-    console.log(111);
-    return res.forbidden('You are not permitted to perform this action.');
+    res.cookie('msg', '操作出错');
+    return res.redirect('/login');
   }
 };
