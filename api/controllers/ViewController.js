@@ -18,6 +18,7 @@
 module.exports = {
   loginView : function(req, res) {
     if(req.session['user'] || req.session['admin']) {
+      res.cookie('msg', '你已登录');
       return res.redirect('/');
     } else {
       return res.view('home/login');
