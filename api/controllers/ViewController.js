@@ -38,5 +38,18 @@ module.exports = {
       res.cookie('msg', '用户请先登录');
       return res.redirect('/login');
     }
+  },
+
+  cTaskView : function(req, res) {
+    //进入发布任务页
+    if(req.session['user']) {
+      res.view('task/addtask');
+    } else if(req.session['admin']) {
+      res.cookie('msg', '别闹了管理员先生');
+      return res.redirect('/');
+    } else {
+      res.cookie('msg', '用户请先登录');
+      return res.redirect('/login');
+    }
   }
 };

@@ -92,5 +92,9 @@ module.exports = {
             }
           });
         });
+  },
+
+  accuseTask : function(req, res) {
+
   }
 };

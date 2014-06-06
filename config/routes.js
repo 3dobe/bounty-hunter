@@ -83,7 +83,8 @@ module.exports.routes = {
 
   //添加任务页
   '/task/create': {
-    view: 'task/addtask'
+    controller: 'view',
+    action: 'cTaskView'
   },
 
   //获取用户'我'所接受的任务列表
@@ -132,6 +133,12 @@ module.exports.routes = {
   'put /fulfilTask': {
     controller: 'task',
     action: 'fulfilTask'
+  },
+
+  //举报任务
+  'put /accuseTask': {
+    controller: 'task',
+    action: 'accuseTask'
   }
 
 
