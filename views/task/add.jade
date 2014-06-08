@@ -1,0 +1,27 @@
+extends ../layout
+
+block body
+  .panel
+    .header
+      ol.breadcrumb
+        li
+          a(href='/') 主页
+          span.divider /
+        li.active 发布话题
+    .inner.post
+      form#create_topic_form(action='/topic/create', method='post')
+        fieldset
+          textarea#title.span9(autofocus='', name='title', rows='1', placeholder='标题字数 10 字以上')
+          .markdown_editor.in_editor
+            .markdown_in_editor
+              textarea.editor(name='t_content', rows='20', placeholder='文章支持 Markdown 语法, 请注意标记代码')
+              .editor_buttons
+                button.btn.action_preview 预览
+                button#submit_btn.btn.btn-primary(type='submit') 提交
+            .markdown_in_preview
+              .preview
+              .editor_buttons
+                button.btn.action_modify 修改
+                button#submit_btn.btn.btn-primary(type='submit') 提交
+          input#topic_tags(type='hidden', name='topic_tags', value='')
+          input(type='hidden', name='_csrf', value='ZcNk6w682KZG4vg4XrEk2W3LpR+7HSRvp1vak=')
