@@ -13,6 +13,7 @@ block body
         li.active 设置
     .inner
       form#setting_form.form-horizontal(action='/modiInfo', method='post')
+        - if (typeof user === 'undefined') user = {}
         .control-group
           label.control-label 学号
           .controls
