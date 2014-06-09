@@ -1,1 +1,79 @@
-h3 测试
+extends ../layout
+
+block body
+  .panel
+    .header
+      span.topic_full_title
+        | nodejs一些小得经验之谈
+      .changes
+        span
+          | 发布于 22 小时前
+        span
+          | 221 次浏览
+      #manage_topic
+    .inner.topic
+      .topic_content
+        .markdown-text
+          p
+            | 一、setTimeout
+            br
+            | 在使用setTimout的时候需要注意下设置的时间，如果超过15分钟以上（这个值可能不准确），setTimeout会变成立即执行，所以长时间的定时器任务尽量使用setInterval来替代
+          p
+            | 二、多进程
+            br
+            | 多进程需要注意很多变量共享的问题
+            br
+            | 所有的全局变量都需要考虑变量共享问题
+            br
+            | 比如定义一个全局变量
+            br
+            | timeout = setTimeout.....
+            br
+            | 然后在另外一个地方调用了clearTimeout(timeout)
+            br
+            | 如果这两个执行都是异步的，那么有可能第一个调用在A进程中执行
+            br
+            | 而第二个变量可能在B进程中执行
+            br
+            | 那么B进程中并不会然后setTimeout中得函数终止
+          p
+            | 三、redis的一些小经验
+            br
+            | 1、setex
+            br
+            | 在setex之后如果在某个地方需要改变这个对应key的值或者改变key的名称
+            br
+            | 改变名称就用rename比较简单，rename不会清除过期时间
+            br
+            | 如果需要改变key值，一定需要先ttl读出具体的数值，然后重新调用setex重新设置
+            br
+            | 而不能通过set来直接改变，set之后过期时间会清除
+          p
+            | 2、zscan
+            br
+            | 有时候我们可能想到用zscan来做搜索
+            br
+            | 比如在一个zset里面查找某一个特定匹配的key
+            br
+            | 可能会这么写
+            br
+            | zscan rank1 0 match abc
+            em
+              br
+              | 然后就直接看返回值中是否存在对应的值
+              br
+              | 如果是想查找唯一，我感觉比较好的方式是加入count参数
+              br
+              | zscan rank1 0 match abc
+            | count 100000
+            br
+            | 原因：
+            br
+            | 如果不加count比较大得值，他会每次返回一个cursor的位置，然后你要不断的去检索，可能需要重复调用zscan很多次才能找到自己需要的值，或者导致错误
+          p
+            | 对于zscan的高级用法，如果有比较精通的人告知
+            br
+            | 我感觉用count得方式比较好，或许有更好的方式
+      .action
+        button#share_weibo_btn.btn.btn-success(onclick='((function(s,d,e,r,l,p,t,z,c){var f="http://v.t.sina.com.cn/share/share.php?appkey=3020045345",u=z||d.location,p=["&url=",e(u),"&title=",e(t||d.title),"&source=",e(r),"&sourceUrl=",e(l),"&content=",c||"gb2312","&pic=",e(p||"")].join("");function a(){if(!window.open([f,p].join(""),"mb",["toolbar=0,status=0,resizable=1,width=440,height=430,left=",(s.width-440)/2,",top=",(s.height-430)/2].join("")))u.href=[f,p].join("");};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else a();})(screen,document,encodeURIComponent,"","","","分享来自CNode的话题：nodejs一些小得经验之谈","",""));') 分享到微博
+        button#collect_btn.btn.btn-success(action='collect') 加入收藏

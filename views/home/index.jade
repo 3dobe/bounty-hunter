@@ -2,7 +2,12 @@ extends ../layout
 
 block body
   .panel
-    .header 当前任务
+    .header
+      select
+        option 全部任务
+        option 闲置任务
+        option 我接受的任务
+        option 我发起的任务
     .inner.no-padding
       #topic_list
         .cell
@@ -18,7 +23,7 @@ block body
             img.user_small_avatar(src='http://cnodegravatar.u.qiniudn.com/avatar/c1a88e13b70b80a4ad50db977afc8419?s=48')
             span.last_active_time 6 小时前
           .topic_title_wrapper
-            a.topic_title(href='/topic/53473dde502e5602740078bc')
+            a.topic_title(href='?q=task/view')
               span.put_top 置顶
               | 杭JS - 2014 JavaScript中国开发者大会: 2014-6-21 ~ 22
         .cell
@@ -33,7 +38,7 @@ block body
           span.last_time.pull-right
             span.last_active_time 14 秒前
           .topic_title_wrapper
-            a.topic_title(href='/topic/537b7fbda087f4562003c864')
+            a.topic_title(href='?q=task/view')
               | 关于session的问题咨询一下
         .cell
           a.user_avatar.pull-left(href='/user/klk')
@@ -48,7 +53,7 @@ block body
             img.user_small_avatar(src='https://avatars.githubusercontent.com/u/6498477?')
             span.last_active_time 30 分钟前
           .topic_title_wrapper
-            a.topic_title(href='/topic/537ae7c7d6e2d161496adc92')
+            a.topic_title(href='?q=task/view')
               | mongoose怎么分段查询
         .cell
           a.user_avatar.pull-left(href='/user/ibmdavid')
@@ -63,7 +68,7 @@ block body
             img.user_small_avatar(src='https://avatars.githubusercontent.com/u/7137186?')
             span.last_active_time 31 分钟前
           .topic_title_wrapper
-            a.topic_title(href='/topic/5367288ffd60644a2e0020b9')
+            a.topic_title(href='?q=task/view')
               | IBM招聘Web应用开发实习生
         .cell
           a.user_avatar.pull-left(href='/user/feikeq')
@@ -78,7 +83,7 @@ block body
             img.user_small_avatar(src='https://avatars.githubusercontent.com/u/7137186?')
             span.last_active_time 31 分钟前
           .topic_title_wrapper
-            a.topic_title(href='/topic/5369fa2882de1fd822008fce')
+            a.topic_title(href='?q=task/view')
               | 把Node.js 入门教学看完了，但还是不知接下来要做什么。。。
         .cell
           a.user_avatar.pull-left(href='/user/freew01f')
@@ -93,7 +98,7 @@ block body
             img.user_small_avatar(src='https://avatars.githubusercontent.com/u/7137186?')
             span.last_active_time 31 分钟前
           .topic_title_wrapper
-            a.topic_title(href='/topic/5371792e4bc6e1af3703dae1')
+            a.topic_title(href='?q=task/view')
               | Lynda. Node.js Essential Training 别看书了,来个视频教程吧
         .cell
           a.user_avatar.pull-left(href='/user/kingapple')
@@ -108,7 +113,7 @@ block body
             img.user_small_avatar(src='https://avatars.githubusercontent.com/u/6647633?')
             span.last_active_time 33 分钟前
           .topic_title_wrapper
-            a.topic_title(href='/topic/537ac739cbcc3963496ab42d')
+            a.topic_title(href='?q=task/view')
               | 亲们，你们在用哪个版本的JQuery呢？
         .cell
           a.user_avatar.pull-left(href='/user/jintaolee')
@@ -123,7 +128,7 @@ block body
             img.user_small_avatar(src='http://cnodegravatar.u.qiniudn.com/avatar/c062c91b987ba164275c0d973b475f3d?s=48')
             span.last_active_time 39 分钟前
           .topic_title_wrapper
-            a.topic_title(href='/topic/537a0dc6cbcc396349492734')
+            a.topic_title(href='?q=task/view')
               | 求助在digitalocean搭建nodejs环境，Nginx！！！
         .cell
           a.user_avatar.pull-left(href='/user/jysperm')
@@ -138,7 +143,7 @@ block body
             img.user_small_avatar(src='https://avatars.githubusercontent.com/u/1147375?')
             span.last_active_time 54 分钟前
           .topic_title_wrapper
-            a.topic_title(href='/topic/537b5d7ecbcc396349878cad')
+            a.topic_title(href='?q=task/view')
               | 自己写了一个中间件依赖注入工具 middleware-injector
         .cell
           a.user_avatar.pull-left(href='/user/fritx')
@@ -152,7 +157,7 @@ block body
           span.last_time.pull-right
             span.last_active_time 1 小时前
           .topic_title_wrapper
-            a.topic_title(href='/topic/537b6e29c3ee0b582000adc4')
+            a.topic_title(href='?q=task/view')
               | 使用 silent命令行工具 + github静态空间 快速构建静态博客
         .cell
           a.user_avatar.pull-left(href='/user/tinshee')
@@ -167,7 +172,7 @@ block body
             img.user_small_avatar(src='https://avatars.githubusercontent.com/u/1147375?')
             span.last_active_time 1 小时前
           .topic_title_wrapper
-            a.topic_title(href='/topic/537b1112cbcc39634979723d')
+            a.topic_title(href='?q=task/view')
               | 关于请求失败，小白问个小白问题
         .cell
           a.user_avatar.pull-left(href='/user/fish')
@@ -182,7 +187,7 @@ block body
             img.user_small_avatar(src='https://avatars.githubusercontent.com/u/1147375?')
             span.last_active_time 1 小时前
           .topic_title_wrapper
-            a.topic_title(href='/topic/537b47d1cbcc39634983b739')
+            a.topic_title(href='?q=task/view')
               | NPM模块的TAG管理
         .cell
           a.user_avatar.pull-left(href='/user/yanyumiao')
@@ -197,7 +202,7 @@ block body
             img.user_small_avatar(src='https://gravatar.com/avatar/ca910cb0a3764451d955368132de689b?d=https%3A%2F%2Fidenticons.github.com%2F0646dc95830c42efa36484d3d8dd5341.png&r=x')
             span.last_active_time 1 小时前
           .topic_title_wrapper
-            a.topic_title(href='/topic/533ab18a5c5f55dd6b01ae67')
+            a.topic_title(href='?q=task/view')
               | 使用Express v3.4.8 重写《Node.js开发指南》中的 microblog 项目
         .cell
           a.user_avatar.pull-left(href='/user/longxipinglq5')
@@ -212,7 +217,7 @@ block body
             img.user_small_avatar(src='https://avatars.githubusercontent.com/u/3362483?')
             span.last_active_time 1 小时前
           .topic_title_wrapper
-            a.topic_title(href='/topic/537b5166cbcc396349856713')
+            a.topic_title(href='?q=task/view')
               | node.js与ArgularJS有啥关系
         .cell
           a.user_avatar.pull-left(href='/user/xiaoxingxing123')
@@ -227,7 +232,7 @@ block body
             img.user_small_avatar(src='https://avatars.githubusercontent.com/u/1147375?')
             span.last_active_time 1 小时前
           .topic_title_wrapper
-            a.topic_title(href='/topic/51597c3a5dff253b378c90bf')
+            a.topic_title(href='?q=task/view')
               | 怎么在node中使用jquery?
         .cell
           a.user_avatar.pull-left(href='/user/jysperm')
@@ -242,366 +247,8 @@ block body
             img.user_small_avatar(src='https://avatars.githubusercontent.com/u/1147375?')
             span.last_active_time 1 小时前
           .topic_title_wrapper
-            a.topic_title(href='/topic/53788d18d6e2d16149ff5e81')
+            a.topic_title(href='?q=task/view')
               | 我发现 pm2 有一个严重的安全问题
-        .cell
-          a.user_avatar.pull-left(href='/user/qianqing')
-            img(src='http://cnodegravatar.u.qiniudn.com/avatar/8662be558edab8a8f85aea3c10edd052?size=48', title='qianqing')
-          span.reply_count.pull-left
-            span.count_of_replies(title='回复数')
-              | 2
-            span.count_seperator /
-            span.count_of_visits(title='点击数')
-              | 88
-          a.last_time.pull-right(href='/topic/537ae5bed6e2d161496a81c2#537b5e5dd6e2d1614981104f')
-            img.user_small_avatar(src='https://avatars.githubusercontent.com/u/6581640?')
-            span.last_active_time 2 小时前
-          .topic_title_wrapper
-            a.topic_title(href='/topic/537ae5bed6e2d161496a81c2')
-              | 关于http中网络不稳定的问题
-        .cell
-          a.user_avatar.pull-left(href='/user/wangxuq')
-            img(src='https://avatars.githubusercontent.com/u/7548836?', title='wangxuq')
-          span.reply_count.pull-left
-            span.count_of_replies(title='回复数')
-              | 3
-            span.count_seperator /
-            span.count_of_visits(title='点击数')
-              | 192
-          a.last_time.pull-right(href='/topic/537ac0e9cbcc3963496971ec#537b5d2fd6e2d1614980da6e')
-            img.user_small_avatar(src='https://avatars.githubusercontent.com/u/7548836?')
-            span.last_active_time 2 小时前
-          .topic_title_wrapper
-            a.topic_title(href='/topic/537ac0e9cbcc3963496971ec')
-              | 花了一个礼拜的时间，终于将node开发指南这本书弄完了，里面遇到了很多错误，都基本已经解决，可以继续努力了。。。
-        .cell
-          a.user_avatar.pull-left(href='/user/ilufei')
-            img(src='https://avatars.githubusercontent.com/u/7371068?', title='ilufei')
-          span.reply_count.pull-left
-            span.count_of_replies(title='回复数')
-              | 0
-            span.count_seperator /
-            span.count_of_visits(title='点击数')
-              | 44
-          span.last_time.pull-right
-            span.last_active_time 2 小时前
-          .topic_title_wrapper
-            a.topic_title(href='/topic/537b59d5cbcc39634986e7a4')
-              | NodeJs技术学习的微信公共平台（nodejsfans）
-        .cell
-          a.user_avatar.pull-left(href='/user/yaochun')
-            img(src='http://cnodegravatar.u.qiniudn.com/avatar/0163d735779c0e0f54ccba7b66ea735c?size=48', title='yaochun')
-          span.reply_count.pull-left
-            span.count_of_replies(title='回复数')
-              | 16
-            span.count_seperator /
-            span.count_of_visits(title='点击数')
-              | 724
-          a.last_time.pull-right(href='/topic/53746c17d6e2d1614940d271#537b5817cbcc396349869984')
-            img.user_small_avatar(src='http://cnodegravatar.u.qiniudn.com/avatar/0163d735779c0e0f54ccba7b66ea735c?size=48')
-            span.last_active_time 2 小时前
-          .topic_title_wrapper
-            a.topic_title(href='/topic/53746c17d6e2d1614940d271')
-              | 【 豌豆荚 - 北京招聘 - fe  】
-        .cell
-          a.user_avatar.pull-left(href='/user/njaulj')
-            img(src='https://avatars.githubusercontent.com/u/3204963?', title='njaulj')
-          span.reply_count.pull-left
-            span.count_of_replies(title='回复数')
-              | 8
-            span.count_seperator /
-            span.count_of_visits(title='点击数')
-              | 351
-          a.last_time.pull-right(href='/topic/5379feabd6e2d1614940bfc1#537b5266d6e2d161497ef9de')
-            img.user_small_avatar(src='https://avatars.githubusercontent.com/u/3204963?')
-            span.last_active_time 3 小时前
-          .topic_title_wrapper
-            a.topic_title(href='/topic/5379feabd6e2d1614940bfc1')
-              | 开源自己写的一个商城代码
-        .cell
-          a.user_avatar.pull-left(href='/user/kingapple')
-            img(src='https://avatars.githubusercontent.com/u/6572403?', title='kingapple')
-          span.reply_count.pull-left
-            span.count_of_replies(title='回复数')
-              | 11
-            span.count_seperator /
-            span.count_of_visits(title='点击数')
-              | 289
-          a.last_time.pull-right(href='/topic/537974b4cbcc3963492b4296#537b3a1dd6e2d161497ac357')
-            img.user_small_avatar(src='http://cnodegravatar.u.qiniudn.com/avatar/b64ea10e7b9d7932a939dd24ed02fae7?size=48')
-            span.last_active_time 4 小时前
-          .topic_title_wrapper
-            a.topic_title(href='/topic/537974b4cbcc3963492b4296')
-              | BootStrap对Firefox真心不友好啊,图标完全乱掉了
-        .cell
-          a.user_avatar.pull-left(href='/user/wangxuq')
-            img(src='https://avatars.githubusercontent.com/u/7548836?', title='wangxuq')
-          span.reply_count.pull-left
-            span.count_of_replies(title='回复数')
-              | 3
-            span.count_seperator /
-            span.count_of_visits(title='点击数')
-              | 229
-          a.last_time.pull-right(href='/topic/5374a614d6e2d161494bf110#537b2f7dd6e2d1614978d2ad')
-            img.user_small_avatar(src='https://avatars.githubusercontent.com/u/7548836?')
-            span.last_active_time 5 小时前
-          .topic_title_wrapper
-            a.topic_title(href='/topic/5374a614d6e2d161494bf110')
-              | nodejs开发指南出现的问题汇总
-        .cell
-          a.user_avatar.pull-left(href='/user/2eron')
-            img(src='https://avatars.githubusercontent.com/u/3272874?', title='2eron')
-          span.reply_count.pull-left
-            span.count_of_replies(title='回复数')
-              | 1
-            span.count_seperator /
-            span.count_of_visits(title='点击数')
-              | 98
-          a.last_time.pull-right(href='/topic/536b25defbc52b2838001215#537b289ecbcc3963497e03c7')
-            img.user_small_avatar(src='https://avatars.githubusercontent.com/u/3030543?')
-            span.last_active_time 6 小时前
-          .topic_title_wrapper
-            a.topic_title(href='/topic/536b25defbc52b2838001215')
-              | nodejs传递request的问题
-        .cell
-          a.user_avatar.pull-left(href='/user/subverter16')
-            img(src='https://avatars.githubusercontent.com/u/6926967?', title='subverter16')
-          span.reply_count.pull-left
-            span.count_of_replies(title='回复数')
-              | 12
-            span.count_seperator /
-            span.count_of_visits(title='点击数')
-              | 262
-          a.last_time.pull-right(href='/topic/5379c9f8cbcc3963493c47e5#537b1fbfcbcc3963497c5372')
-            img.user_small_avatar(src='https://avatars.githubusercontent.com/u/7371068?')
-            span.last_active_time 6 小时前
-          .topic_title_wrapper
-            a.topic_title(href='/topic/5379c9f8cbcc3963493c47e5')
-              | 【求置顶】Noder们，让我们以城市结合起来！收集各地区QQ群，欢迎补充
-        .cell
-          a.user_avatar.pull-left(href='/user/xiaojue')
-            img(src='http://cnodegravatar.u.qiniudn.com/avatar/49fe457f6afcdbe1535c1485ae6ec5cb?s=48', title='xiaojue')
-          span.reply_count.pull-left
-            span.count_of_replies(title='回复数')
-              | 6
-            span.count_seperator /
-            span.count_of_visits(title='点击数')
-              | 1194
-          a.last_time.pull-right(href='/topic/516ccc2c6d382773065c1064#537b1b5ad6e2d161497520ea')
-            img.user_small_avatar(src='https://avatars.githubusercontent.com/u/6335536?')
-            span.last_active_time 7 小时前
-          .topic_title_wrapper
-            a.topic_title(href='/topic/516ccc2c6d382773065c1064')
-              | dropbox支持nodejs啦。
-        .cell
-          a.user_avatar.pull-left(href='/user/2eron')
-            img(src='https://avatars.githubusercontent.com/u/3272874?', title='2eron')
-          span.reply_count.pull-left
-            span.count_of_replies(title='回复数')
-              | 12
-            span.count_seperator /
-            span.count_of_visits(title='点击数')
-              | 253
-          a.last_time.pull-right(href='/topic/5368996d243c1e160902f7e4#537b1556cbcc3963497a498c')
-            img.user_small_avatar(src='https://avatars.githubusercontent.com/u/3272874?')
-            span.last_active_time 7 小时前
-          .topic_title_wrapper
-            a.topic_title(href='/topic/5368996d243c1e160902f7e4')
-              | Nodejs入门遇到的问题，formidable上传图片时报错
-        .cell
-          a.user_avatar.pull-left(href='/user/allen6290')
-            img(src='https://avatars.githubusercontent.com/u/68548?', title='allen6290')
-          span.reply_count.pull-left
-            span.count_of_replies(title='回复数')
-              | 6
-            span.count_seperator /
-            span.count_of_visits(title='点击数')
-              | 144
-          a.last_time.pull-right(href='/topic/5378ee28cbcc396349150c76#537b0b40cbcc396349784ec0')
-            img.user_small_avatar(src='https://avatars.githubusercontent.com/u/342549?')
-            span.last_active_time 8 小时前
-          .topic_title_wrapper
-            a.topic_title(href='/topic/5378ee28cbcc396349150c76')
-              | 关于PM2的Cluster问题，请高人帮忙解决~！！！！！！！！！！！！！！！！！！！
-        .cell
-          a.user_avatar.pull-left(href='/user/brighthas')
-            img(src='http://cnodegravatar.u.qiniudn.com/avatar/7e0ad66b5e198b1afc4fc05e2a2f6158?s=48', title='brighthas')
-          span.reply_count.pull-left
-            span.count_of_replies(title='回复数')
-              | 5
-            span.count_seperator /
-            span.count_of_visits(title='点击数')
-              | 559
-          a.last_time.pull-right(href='/topic/533d64b58abcb0f80700a893#537b070acbcc39634977705f')
-            img.user_small_avatar(src='https://avatars.githubusercontent.com/u/7055332?')
-            span.last_active_time 8 小时前
-          .topic_title_wrapper
-            a.topic_title(href='/topic/533d64b58abcb0f80700a893')
-              | node.js 开源论坛
-        .cell
-          a.user_avatar.pull-left(href='/user/dlutwuwei')
-            img(src='https://avatars.githubusercontent.com/u/3362483?', title='dlutwuwei')
-          span.reply_count.pull-left
-            span.count_of_replies(title='回复数')
-              | 1
-            span.count_seperator /
-            span.count_of_visits(title='点击数')
-              | 158
-          a.last_time.pull-right(href='/topic/537af328cbcc396349734ae7#537afe5bd6e2d161496f7220')
-            img.user_small_avatar(src='https://avatars.githubusercontent.com/u/6335536?')
-            span.last_active_time 9 小时前
-          .topic_title_wrapper
-            a.topic_title(href='/topic/537af328cbcc396349734ae7')
-              | express4.2源码解析
-        .cell
-          a.user_avatar.pull-left(href='/user/peterfuture')
-            img(src='https://avatars.githubusercontent.com/u/3294183?', title='peterfuture')
-          span.reply_count.pull-left
-            span.count_of_replies(title='回复数')
-              | 12
-            span.count_seperator /
-            span.count_of_visits(title='点击数')
-              | 308
-          a.last_time.pull-right(href='/topic/53756d02d6e2d161496cd8d4#537afb28cbcc39634975015f')
-            img.user_small_avatar(src='https://avatars.githubusercontent.com/u/6335536?')
-            span.last_active_time 9 小时前
-          .topic_title_wrapper
-            a.topic_title(href='/topic/53756d02d6e2d161496cd8d4')
-              | nodejs 如何使用 通过ffi调用返回来的内存指针
-        .cell
-          a.user_avatar.pull-left(href='/user/leapon')
-            img(src='http://cnodegravatar.u.qiniudn.com/avatar/3991e727ca4261b83566e436294fb90d?size=48', title='leapon')
-          span.reply_count.pull-left
-            span.count_of_replies(title='回复数')
-              | 3
-            span.count_seperator /
-            span.count_of_visits(title='点击数')
-              | 465
-          a.last_time.pull-right(href='/topic/529ce5c4a6957a080964b559#537afb06cbcc39634974f90f')
-            img.user_small_avatar(src='https://avatars.githubusercontent.com/u/6335536?')
-            span.last_active_time 9 小时前
-          .topic_title_wrapper
-            a.topic_title(href='/topic/529ce5c4a6957a080964b559')
-              | nodesummit 在旧金山明天开幕
-        .cell
-          a.user_avatar.pull-left(href='/user/mrlong')
-            img(src='http://cnodegravatar.u.qiniudn.com/avatar/b2b4503d15a3a7f2b55196e3596c0f1d?size=48', title='mrlong')
-          span.reply_count.pull-left
-            span.count_of_replies(title='回复数')
-              | 3
-            span.count_seperator /
-            span.count_of_visits(title='点击数')
-              | 128
-          a.last_time.pull-right(href='/topic/53774fffd6e2d16149c6b366#537af66fd6e2d161496dd80a')
-            img.user_small_avatar(src='http://cnodegravatar.u.qiniudn.com/avatar/b2b4503d15a3a7f2b55196e3596c0f1d?size=48')
-            span.last_active_time 9 小时前
-          .topic_title_wrapper
-            a.topic_title(href='/topic/53774fffd6e2d16149c6b366')
-              | JSON.stringify() 报错粘出代码， 谢谢。
-        .cell
-          a.user_avatar.pull-left(href='/user/zsytssk')
-            img(src='http://cnodegravatar.u.qiniudn.com/avatar/2fa68198226f0275ae0aceff09870ba7?size=48', title='zsytssk')
-          span.reply_count.pull-left
-            span.count_of_replies(title='回复数')
-              | 7
-            span.count_seperator /
-            span.count_of_visits(title='点击数')
-              | 255
-          a.last_time.pull-right(href='/topic/537977f7d6e2d1614926d467#537ae2e2d6e2d1614969fd67')
-            img.user_small_avatar(src='http://cnodegravatar.u.qiniudn.com/avatar/93e9443ee73a8766bad3fbd7939083ca?size=48')
-            span.last_active_time 11 小时前
-          .topic_title_wrapper
-            a.topic_title(href='/topic/537977f7d6e2d1614926d467')
-              | 对 jade 的看法
-        .cell
-          a.user_avatar.pull-left(href='/user/freew01f')
-            img(src='https://avatars.githubusercontent.com/u/4323659?', title='freew01f')
-          span.reply_count.pull-left
-            span.count_of_replies(title='回复数')
-              | 7
-            span.count_seperator /
-            span.count_of_visits(title='点击数')
-              | 163
-          a.last_time.pull-right(href='/topic/537a34edd6e2d161494ab3e1#537ac81acbcc3963496ae215')
-            img.user_small_avatar(src='https://avatars.githubusercontent.com/u/4323659?')
-            span.last_active_time 13 小时前
-          .topic_title_wrapper
-            a.topic_title(href='/topic/537a34edd6e2d161494ab3e1')
-              | 问个语法问题~这里好奇怪呀~
-        .cell
-          a.user_avatar.pull-left(href='/user/allen6290')
-            img(src='https://avatars.githubusercontent.com/u/68548?', title='allen6290')
-          span.reply_count.pull-left
-            span.count_of_replies(title='回复数')
-              | 2
-            span.count_seperator /
-            span.count_of_visits(title='点击数')
-              | 63
-          a.last_time.pull-right(href='/topic/537ac2a0d6e2d1614963fad0#537ac648cbcc3963496a8526')
-            img.user_small_avatar(src='https://avatars.githubusercontent.com/u/68548?')
-            span.last_active_time 13 小时前
-          .topic_title_wrapper
-            a.topic_title(href='/topic/537ac2a0d6e2d1614963fad0')
-              | Express seesion超时问题~~~~~~！
-        .cell
-          a.user_avatar.pull-left(href='/user/yunfei')
-            img(src='http://cnodegravatar.u.qiniudn.com/avatar/325867574aebe24b5bc4dbf66b7df8d0?size=48', title='yunfei')
-          span.reply_count.pull-left
-            span.count_of_replies(title='回复数')
-              | 0
-            span.count_seperator /
-            span.count_of_visits(title='点击数')
-              | 105
-          span.last_time.pull-right
-            span.last_active_time 14 小时前
-          .topic_title_wrapper
-            a.topic_title(href='/topic/537ab799cbcc396349678371')
-              | app.use('/path/:id?',function (req, res, next){})//这句是什么意思？还有应用的场景？求大神指点。。。
-        .cell
-          a.user_avatar.pull-left(href='/user/tonyc620')
-            img(src='http://cnodegravatar.u.qiniudn.com/avatar/aa4bb44033966010397760947adf5b11?size=48', title='tonyc620')
-          span.reply_count.pull-left
-            span.count_of_replies(title='回复数')
-              | 3
-            span.count_seperator /
-            span.count_of_visits(title='点击数')
-              | 146
-          a.last_time.pull-right(href='/topic/53762b83cbcc3963499405b7#537ab5d0cbcc396349671f7f')
-            img.user_small_avatar(src='http://cnodegravatar.u.qiniudn.com/avatar/a3ca53d93914b56abfddf4cb08105e70?size=48')
-            span.last_active_time 14 小时前
-          .topic_title_wrapper
-            a.topic_title(href='/topic/53762b83cbcc3963499405b7')
-              | 请教一个关于文件由UTF-8转码为GBK文件的问题
-        .cell
-          a.user_avatar.pull-left(href='/user/wangxuq')
-            img(src='https://avatars.githubusercontent.com/u/7548836?', title='wangxuq')
-          span.reply_count.pull-left
-            span.count_of_replies(title='回复数')
-              | 1
-            span.count_seperator /
-            span.count_of_visits(title='点击数')
-              | 51
-          a.last_time.pull-right(href='/topic/537a345ed6e2d161494a9920#537aaba2cbcc396349651779')
-            img.user_small_avatar(src='https://avatars.githubusercontent.com/u/7548836?')
-            span.last_active_time 15 小时前
-          .topic_title_wrapper
-            a.topic_title(href='/topic/537a345ed6e2d161494a9920')
-              | basedir=`dirname "$0"`错误为什么使用npm install -d 就可以解决，能不能告诉我为什么呢？
-        .cell
-          a.user_avatar.pull-left(href='/user/fantasyni')
-            img(src='http://cnodegravatar.u.qiniudn.com/avatar/ca85331e7802fd880930417a74086671?s=48', title='fantasyni')
-          span.reply_count.pull-left
-            span.count_of_replies(title='回复数')
-              | 2
-            span.count_seperator /
-            span.count_of_visits(title='点击数')
-              | 1148
-          a.last_time.pull-right(href='/topic/5379bdebcbcc39634939748f#537aaa2ad6e2d161495f1c51')
-            img.user_small_avatar(src='http://cnodegravatar.u.qiniudn.com/avatar/ca85331e7802fd880930417a74086671?s=48')
-            span.last_active_time 15 小时前
-          .topic_title_wrapper
-            a.topic_title(href='/topic/5379bdebcbcc39634939748f')
-              | Bearcat pomelo game 实战 -- treasures
       .pagination(current_page='1')
         ul
           li.disabled
