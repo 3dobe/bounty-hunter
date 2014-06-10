@@ -16,5 +16,5 @@ block body
               span.last_time.pull-right
                 span.last_active_time(data-date=task.updatedAt.toJSON())
               .topic_title_wrapper
-                a.topic_title(href='task/view/'+task.id)
+                a.topic_title(href='/task/view/'+task.id)
                   | #{task.title}
