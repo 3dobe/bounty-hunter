@@ -1,0 +1,20 @@
+extends ../layout
+
+block body
+  .panel
+    .header #{title}
+    .inner.no-padding
+      #topic_list
+        if none
+          .cell
+            | 没有记录
+        else
+          each task in tasks
+            .cell
+              a.user_avatar.pull-left(href='javascript:void(0);',style='margin-right: 10px; ')
+                img(src=task.publisherAvatar, title='头像')
+              span.last_time.pull-right
+                span.last_active_time(data-date=task.updatedAt.toJSON())
+              .topic_title_wrapper
+                a.topic_title(href='task/view/'+task.id)
+                  | #{task.title}

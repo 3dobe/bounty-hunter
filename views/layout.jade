@@ -23,6 +23,8 @@ html
     script(type="text/javascript", src="/js/jquery.js")
     script(type="text/javascript", src="/js/alertify.min.js")
     script(type="text/javascript", src="/js/jquery.cookie.js")
+    script(type="text/javascript", src="/js/moment-with-langs-2.5.0.min.js")
+    script(type="text/javascript", src="/js/moment.js")
     script(type="text/javascript", src="/js/alertmsg.js")
 
   body
@@ -35,7 +37,13 @@ html
               a(href='/') 赏金猎人
           ul.nav.pull-right
             li
-              a(href='?q=home/login') 登录
+              a(href='/') 首页
+            if username || admin
+              li
+                a(href='/logout') 退出
+            else
+              li
+                a(href='/login') 登录
           a#responsive-sidebar-trigger.btn.btn-navbar
             span.icon-bar
             span.icon-bar
@@ -43,78 +51,105 @@ html
 
     #main
       #sidebar
-        .panel
-          .header
-            span.col_fade 个人信息
-          .inner
-            .user_card
+        if username
+          .panel
+            .header
+              span.col_fade 个人信息
+            .inner
+              .user_card
+                div
+                  a.user_avatar(href='/info')
+                    img(src=avatar, title='头像')
+                  span.user_name
+                    a.dark(href='/info') #{username}
+                  .board.clearfix
+                    .floor
+                      a(href='/info')
+                        span.big
+                        | 我的信息
+                    .floor
+                      a(href='/tasks/publish')
+                        span.big
+                        | 我发布的任务
+                    .floor
+                      a(href='/tasks/accept')
+                        span.big
+                        | 我接受的任务
+            .inner
+              a#create_topic_btn(href='/task/create')
+                button.btn.btn-success
+                  | 发布任务
+         if admin
+          .panel
+            .header
+              span.col_fade 个人信息
+            .inner
+              .user_card
+                div
+                  span.user_name
+                    | #{admin.username}
+                  .board.clearfix
+                    .floor
+                      a(href='/tasks/accuse')
+                        span.big
+                        | 被检举的任务
+                      if admin.isSuper
+                        .floor
+                        a(href='/admin/add')
+                          span.big
+                          | 添加管理员
+        if !username && !admin
+          .panel
+            .inner
+              p bounty-hunter:邑大赏金猎人
               div
-                a.user_avatar(href='?q=home/info')
-                  img(src='https://avatars.githubusercontent.com/u/6647633?', title='fritx')
-                span.user_name
-                  a.dark(href='/user/fritx') fritx
-                .board.clearfix
-                  .floor
-                    a(href='/user/fritx/collections')
-                      span.big 3
-                      | 话题收藏
-                  .floor
-                    a(href='/user/fritx/following')
-                      span.big 4
-                      | 关注
-                    .space
-                    a(href='/user/fritx/follower')
-                      span.big 0
-                      | 粉丝
-                    .space
-                    span.big 60
-                    | 积分
+                | 游客请先
+                a(href='/login') 登陆
         .panel
           .header
-            span.col_fade 排行榜 TOP 10
+            span.col_fade 赏金猎人 TOP 10
           .inner
             ol
               li
                 span.top_score 6375
                 span.user_name
-                  a(href='/user/jiyinyiyong') jiyinyiyong
+                  a(href='/user/jiyinyiyong') 假数据1
               li
                 span.top_score 2795
                 span.user_name
-                  a(href='/user/youxiachai') youxiachai
+                  a(href='/user/youxiachai') 假数据2
               li
                 span.top_score 2610
                 span.user_name
-                  a(href='/user/leapon') leapon
+                  a(href='/user/leapon') 假数据3
               li
                 span.top_score 2235
                 span.user_name
-                  a(href='/user/a272121742') a272121742
+                  a(href='/user/a272121742') 假数据4
               li
                 span.top_score 2160
                 span.user_name
-                  a(href='/user/leizongmin') leizongmin
+                  a(href='/user/leizongmin') 假数据5
               li
                 span.top_score 2140
                 span.user_name
-                  a(href='/user/suqian') suqian
+                  a(href='/user/suqian') 假数据6
               li
                 span.top_score 1695
                 span.user_name
-                  a(href='/user/panawang') panawang
+                  a(href='/user/panawang') 假数据7
               li
                 span.top_score 1340
                 span.user_name
-                  a(href='/user/saighost') saighost
+                  a(href='/user/saighost') 假数据8
               li
                 span.top_score 1325
                 span.user_name
-                  a(href='/user/yakczh') yakczh
+                  a(href='/user/yakczh') 假数据9
               li
                 span.top_score 1300
                 span.user_name
-                  a(href='/user/snoopy') snoopy
-
+                  a(href='/user/snoopy') 假数据10
 
       #content
         block body

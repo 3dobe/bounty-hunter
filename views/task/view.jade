@@ -4,54 +4,48 @@ block body
   .panel
     .header
       span.topic_full_title
-        | 《Node.js实战》求188、189页内容
+        | #{task.title}
       .changes
-        span
-          | 发布于 5 小时前
-        span
-          | 70 次浏览
+        p 发布于
+          span.last_active_time(data-date=task.createdAt.toJSON())
+      .changes
+        p 最后更新于
+          span.last_active_time(data-date=task.updatedAt.toJSON())
+      if userid == task.publisherId
+        .manage_topic
+          a(href='/task/modi/'+task.id)
+            img.user_icon(src='http://cnodejs.qiniudn.com/public/images/doc_edit_icon&16.png', title='编辑')
     .inner.topic
       .topic_content
         .markdown-text
           p
-            | 一个月前JD买的书，刚发现188页189页被油浸过一样完全看不清。
-            br
-            | 正看的过瘾呢，不想换了太麻烦。
-          p 求好心人发张188页189页的图片给我吧(szmtcjm@126.com)，非常感谢！！！
-  .panel
-    .header
-      span.col_fade 2 回复
-    #reply1.cell.reply_area.reply_item(reply_id='53945339c3ee0b58208024f0')
-      a#53945339c3ee0b58208024f0.anchor
-      .author_content
-        a.user_avatar(href='/user/xiaxiaokang')
-          img(src='http://cnodegravatar.u.qiniudn.com/avatar/5c2dd4e24ba722c4bc5f10cc505328bd?size=48', title='xiaxiaokang')
-        .user_info
-          a.dark.reply_author(href='/user/xiaxiaokang')
-            | xiaxiaokang
-          a.reply_time(href='#53945339c3ee0b58208024f0') 1楼•2 小时前
-        .user_action
-          span
-            // 
-      .reply_content
-        .markdown-text
-          p 请问你是哪本实战？进口的还是国产的？
-      .clearfix
-        .reply2_area
-    #reply2.cell.reply_area.reply_item(reply_id='53946622a087f4562072fb72')
-      a#53946622a087f4562072fb72.anchor
-      .author_content
-        a.user_avatar(href='/user/szmtcjm')
-          img(src='https://avatars.githubusercontent.com/u/2938650?', title='szmtcjm')
-        .user_info
-          a.dark.reply_author(href='/user/szmtcjm')
-            | szmtcjm
-          a.reply_time(href='#53946622a087f4562072fb72') 2楼•1 小时前
-        .user_action
-          span
-            // 
-      .reply_content
-        .markdown-text
-          p 国产的
-      .clearfix
-        .reply2_area
+            | #{task.descp}
+          p
+            | 雇主联系方式
+            | 电话:#{task.publisherPhone}
+            | 邮箱:#{task.publisherEmail}
+      if userid == task.publisherId
+        if task.accepterId == null
+          .editor_buttons
+            a#submit_btn.btn.btn-danger(href='/task/delete/'+task.id) 删除任务
+        else if task.isFinish
+          .editor_buttons
+            button#submit_btn.btn.btn-primary(disabled="true") 已终结
+        else if task.accepterId != null
+          .editor_buttons
+            a#submit_btn.btn.btn-primary(href='/task/end/'+task.id) 终结任务
+      else if admin
+        .editor_buttons
+          a#submit_btn.btn.btn-danger(href='/task/delete/'+task.id) 删除任务
+      else if !username && !admin
+        .editor_buttons
+          button#submit_btn.btn.btn-danger(disabled="true") 请先登录
+      else if task.accepterId == null
+        .editor_buttons
+          a#submit_btn.btn.btn-primary(href='/task/accept/'+task.id) 接受任务
+      else if task.accepterId == userid
+        .editor_buttons
+          button#submit_btn.btn.btn-primary(disabled="true") 你已接受该任务
+      else if task.accepterId != null
+        .editor_buttons
+          button#submit_btn.btn.btn-danger(disabled="true") 已给抢先一步

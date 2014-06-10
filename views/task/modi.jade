@@ -7,13 +7,16 @@ block body
         li
           a(href='/') 主页
           span.divider /
-        li.active 发布任务
+        li.active 更新任务
     .inner.post
-      form#create_topic_form(action='/task', method='post')
+      form#create_topic_form(action='/task/'+task.id, method='post')
         fieldset
           textarea#title.span9(autofocus='', name='title', rows='1', placeholder='标题不能为空', required='required')
+            | #{task.title}
           .markdown_editor.in_editor
             .markdown_in_editor
               textarea.editor(name='descp', rows='20', placeholder='请说明任务时限、要求、报酬等等细节，500字以内', required='required', maxlength=500)
+                | #{task.descp}
+              input(type='hidden', name='_method', value='put')
               .editor_buttons
-                button#submit_btn.btn.btn-primary(type='submit') 发布
+                button#submit_btn.btn.btn-primary(type='submit') 更新

@@ -10,36 +10,36 @@ block body
         li
           a(href='/') 主页
           span.divider /
-        li.active 设置
+        li.active 个人信息
     .inner
       form#setting_form.form-horizontal(action='/modiInfo', method='post')
         .control-group
           label.control-label 学号
           .controls
-            input.input-xlarge.readonly(name='username', size='30', type='text', readonly='true', value='11080731')
+            input.input-xlarge.readonly(name='username', size='30', type='text', readonly='true', value=user.id)
         .control-group
           label.control-label 姓名
           .controls
-            input.input-xlarge.readonly(name='name', size='30', type='text', readonly=true, value='林亮')
+            input.input-xlarge.readonly(name='name', size='30', type='text', readonly=true, value=user.name)
         .control-group
           label.control-label 性别
           .controls
-            input.input-xlarge.readonly(name='gender', size='30', type='text', readonly=true, value='男')
+            input.input-xlarge.readonly(name='gender', size='30', type='text', readonly=true, value=user.gender)
         .control-group
           label.control-label 班级
           .controls
-            input.input-xlarge.readonly(name='class', size='30', type='text', readonly=true, value='110807')
+            input.input-xlarge.readonly(name='class', size='30', type='text', readonly=true, value=user.class)
         .control-group
           label.control-label 宿舍号
           .controls
-            input.input-xlarge(name='dormNo', size='30', type='text', readonly=true, value='16-308')
+            input.input-xlarge(name='dormNo', size='30', type='text', readonly=true, value=user.dormNo)
         .control-group
           label.control-label 手机号码
           .controls
-            input.input-xlarge(name='phone', size='30', type='text', value='13428281979')
+            input.input-xlarge(name='phone', size='30', type='text', value=user.phone)
         .control-group
           label.control-label 电子邮件
           .controls
-            input.input-xlarge(name='email', size='30', type='text', value='uxfritz@163.com')
+            input.input-xlarge(name='email', size='30', type='text', value=user.email)
         .form-actions
-          input.btn(type='submit', value='保存设置')
+          input.btn(type='submit', value='保存')
