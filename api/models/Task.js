@@ -24,6 +24,18 @@ module.exports = {
       type: 'string',
       required: true
     },
+    publisherAvatar: {
+      type: 'string',
+      required: true
+    },
+    publisherPhone: {
+      type: 'string',
+      required: true
+    },
+    publisherEmail: {
+      type: 'string',
+      required: true
+    },
     accepterId: 'string',
     isFinish: {
       type: 'boolean',

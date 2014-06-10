@@ -21,6 +21,10 @@ module.exports = {
     dormNo : 'string',
     email: 'email',
     phone:  'string',
+    avatar: {
+      type: 'string',
+      defaultsTo: '/images/avatar.jpg'
+    },
     condition: {
       type: 'boolean',
       defaultsTo: false
