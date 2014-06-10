@@ -1,10 +1,10 @@
 $(document).ready(function() {
   function alertmsg(){
-    if($.cookie("msg")) {
-      var msg = $.cookie("msg");
+    if($.cookie('msg')) {
+      var msg = $.cookie('msg');
       alertify.log(msg);
-      //alert(msg);
-      $.removeCookie('msg');
+      $.removeCookie('msg', { path: '/' });
+      console.log($.cookie('msg'));
     }
   }
   alertmsg();
