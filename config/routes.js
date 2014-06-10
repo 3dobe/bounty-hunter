@@ -33,7 +33,8 @@ module.exports.routes = {
   // 
   // (This would also work if you had a file at: `/views/home.ejs`)
   '/': {
-    view: 'home/index'
+    controller: 'view',
+    action: 'indexView'
   },
 
   //登陆页控制器
@@ -73,12 +74,9 @@ module.exports.routes = {
 
   /*任务模块*/
   //任务详情页
-  '/task/view': {
-    view: 'task/taskview'
-  },
-
   '/task/view/:id': {
-    view: 'task/taskview'
+    controller: 'view',
+    action: 'taskView'
   },
 
   //添加任务页
@@ -87,22 +85,22 @@ module.exports.routes = {
     action: 'cTaskView'
   },
 
-  //获取用户'我'所接受的任务列表
-  'get /myTasksAccept': {
+  //接受任务
+  '/task/accept/:id': {
     controller: 'task',
-    action:'myTasksAccept'
+    action: 'accept'
   },
 
-  //获取所有或单一任务
-  'get /task/:id?': {
-    controller: 'task',
-    action: 'find'
+  //修改任务页
+  '/task/modi/:id': {
+    controller: 'view',
+    action: 'modi'
   },
 
   //添加任务
   'post /task': {
     controller: 'task',
-    action: 'create'
+    action: 'add'
   },
 
   //更新任务
@@ -112,31 +110,26 @@ module.exports.routes = {
   },
 
   //删除任务
-  'delete /user/:id': {
+  '/task/delete/:id': {
     controller: 'task',
     action: 'destroy'
   },
 
+  //终结任务
+  '/task/end/:id': {
+    controller: 'task',
+    action: 'fulfil'
+  },
+
   //获取用户'我'所发布的任务列表
-  'get /myTasksPublish': {
-    controller: 'task',
-    action: 'myTasksPublish'
-  },
-
-  //接受任务
-  'put /acceptTask': {
-    controller: 'task',
-    action: 'acceptTask'
-  },
-
-  //完成任务
-  'put /fulfilTask': {
-    controller: 'task',
-    action: 'fulfilTask'
+  //获取用户'我'所接受的任务列表
+  '/tasks/:publishOrAccept': {
+    controller: 'view',
+    action: 'myTasksView'
   },
 
   //举报任务
-  'put /accuseTask': {
+  'put /task/accuse': {
     controller: 'task',
     action: 'accuseTask'
   },
