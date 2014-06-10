@@ -26,9 +26,9 @@ module.exports = function(req, res, next) {
       } else {
         //有相应用户时将noUser标识值设为false
         req.body['noUser'] = false;
-        req.body['password'] = crypto.createHash('md5')
+        var password = crypto.createHash('md5')
             .update(req.body['password']).digest('hex');
-        if(user.password != req.body['password']) {
+        if(user.password != password) {
           //密码不匹配,添加wrongPw标识值,设为true
           req.body['wrongPw'] = true;
           req.body['encryptPw'] = crypto.createHash('md5')
