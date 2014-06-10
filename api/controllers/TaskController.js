@@ -16,80 +16,147 @@
  */
 
 module.exports = {
-  myTasksPublish : function(req, res) {
-    //用户发布的任务列表
-    var id = req.session['user'].id;
-    Task.find({
-      publisherId : id
-    }).done(function (err, tasks) {
-      if(err) {
-        console.log(err);
-      } else if (tasks==null){
-        return res.send({ msg : 'no task' });
-      } else {
-        return res.send({ tasks : tasks });
-      }
-    });
+
+  find : function(req, res) {
+
   },
 
-  myTasksAccept : function(req, res) {
-    //用户接受的任务列表
-    var id = req.session['user'].id;
-    Task.find({
-      accepterId : id
-    }).done(function (err, tasks) {
+  add : function(req, res) {
+    var title = req.body['title'];
+    var descp = req.body['descp'];
+    var id = req.body['userid'];
+    var avatar = req.body['avatar'];
+    var phone = req.body['phone'];
+    var email = req.body['email'];
+    Task.create({
+      title: title,
+      descp: descp,
+      publisherId: id,
+      publisherAvatar: avatar,
+      publisherPhone: phone,
+      publisherEmail: email
+    }).done(function(err, task) {
           if(err) {
-            console.log(err);
-          } else if (tasks==null){
-            return res.send({ msg : 'no task' });
-          } else {
-            return res.send({ tasks : tasks });
+            res.cookie('msg', '内部错误');
+            return res.redirect('back');
           }
+          if(!task) {
+            res.cookie('msg', '发布任务失败');
+            return res.redirect('back');
+          }
+          res.cookie('msg', '发布任务成功');
+          return res.redirect('task/view/' + task.id);
+        })
+  },
+
+  update : function(req, res) {
+    var title = req.body['title'];
+    var descp = req.body['descp'];
+    var id = req.params['id'];
+    console.log(2221);
+    Task.findOne({
+      id: id
+    }).done(function(err, task) {
+          if(err) {
+            res.cookie('msg', '内部错误');
+            return res.redirect('back');
+          }
+          if(!task) {
+            res.cookie('msg', '没有该任务');
+            return res.redirect('back');
+          }
+          if(task.publisherId != req.session['user'].id) {
+            res.cookie('msg', '你没有权限喔亲');
+            return res.redirect('back');
+          }
+          task.title = title;
+          task.descp = descp;
+          task.save(function(err) {
+            if(err) {
+              res.cookie('msg', '内部错误');
+              return res.redirect('back');
+            }
+            res.cookie('msg', '更新成功');
+            return res.redirect('task/view/'+task.id);
+          })
         });
   },
 
-  acceptTask : function(req, res) {
+  destroy : function(req, res) {
+    var uid = req.session['user'].id;
+    var id = req.params['id'];
+    Task.destroy({
+      id: id,
+      publisherId: uid
+    }).done(function(err) {
+          if(err) {
+            res.cookid('msg', '内部错误');
+            return res.redirect('back');
+          }
+          res.cookie('msg', '删除成功');
+          return res.redirect('/');
+        });
+  },
+
+  accept : function(req, res) {
     //用户接受任务
-    var tid = req.query['id'];
+    var tid = req.params['id'];
     var id = req.session['user'].id;
     Task.findOne({
       id : tid,
       accepterId : null
     }).done(function (err, task) {
       if(err) {
-        console.log(err);
+        res.cookie('msg', '内部错误');
+        return res.redirect('back');
       }
       if(!task) {
-        return res.send({ msg : 'no task'})
+        res.cookie('msg', '没有该任务');
+        return res.redirect('back');
+      }
+      if(task.publisherId == id) {
+        res.cookie('msg', '自己接受自己发布的任务?');
+        return res.redirect('back');
       }
       task.accepterId = id;
       task.save(function(err) {
         if(err) {
-          return res.send({ msg : 'accept fail' })
+          res.cookie('msg', '内部错误');
+          return res.redirect('back');
+        } else {
+          res.cookie('msg', '成功接受');
+          return res.redirect('task/view/'+tid);
         }
       });
     });
   },
 
-  fulfilTask : function(req, res) {
+  fulfil : function(req, res) {
     //完成任务
-    var tid = req.query['id'];
-    var id = req.session['user'].id;
+    var uid = req.query['uid'];
+    var id = req.params['id'];
     Task.findOne({
-      id : tid,
+      id : id,
       isFinish : false
     }).done(function (err, task) {
           if(err) {
             console.log(err);
+            res.cookie('msg', '内部错误');
+            return res.redirect('back');
           }
           if(!task) {
-            return res.send({ msg : 'no task'})
+            res.cookie('msg', '没有该任务');
+            return res.redirect('back');
           }
           task.isFinish = true;
           task.save(function(err) {
             if(err) {
-              return res.send({ msg : 'finish fail' })
+              console.log(err);
+              res.cookie('msg', '内部错误');
+              return res.redirect('back');
             }
+            res.cookie('msg', '终结任务成功');
+            return res.redirect('/task/view/'+task.id);
           });
         });
   },

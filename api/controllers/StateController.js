@@ -142,6 +142,8 @@ module.exports = {
       }
 
       //密码不匹配
+      console.log('密码不匹配');
+      console.log(data);
       if (!req.body['noUser'] && req.body['wrongPw']) {
         //4.1.1 如密码不匹配,则发送请求到学生服务子系统进行抓取,
         var client = new Client('jwc.wyu.cn', '/student', 'gbk');
@@ -169,16 +171,24 @@ module.exports = {
             var success = /welcome/.test(body);
             if (success) {
               //4.1.1.1 抓取成功,更新数据到数据库,保存用户信息到session,转页
-              user.password = req.body['encryptPw'];
-              user.save(function (err) {
-                if (err) {
-                  console.log(err);
-                  next(new Error("更新出错"));
-                } else {
-                  console.log(user);
-                  next(null, user);
-                }
-              });
+              User.findOne({
+                id: req.body['username']
+              }).done(function(err, user) {
+                    if (err) {
+                      console.log(err);
+                      next(new Error('更新数据出错'));
+                    }
+                    user.password = req.body['encryptPw'];
+                    user.save(function (err) {
+                      if (err) {
+                        console.log(err);
+                        next(new Error("更新出错"));
+                      } else {
+                        console.log(user);
+                        next(null, user);
+                      }
+                    });
+                  });
             } else {
               next(new Error('密码错误'));
             }
