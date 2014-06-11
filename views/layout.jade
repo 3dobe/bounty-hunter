@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title= title
+    title 邑大赏金猎人
 
     // Viewport mobile tag for sensible mobile support
     meta(name="viewport",content="width=device-width, initial-scale=1, maximum-scale=1")
@@ -75,6 +75,10 @@ html
                       a(href='/tasks/accept')
                         span.big
                         | 我接受的任务
+                    .floor
+                      a(href='/tasks/notcheck')
+                        span.big
+                        | 未审核任务
             .inner
               a#create_topic_btn(href='/task/create')
                 button.btn.btn-success
@@ -90,9 +94,9 @@ html
                     | #{admin.username}
                   .board.clearfix
                     .floor
-                      a(href='/tasks/accuse')
+                      a(href='/tasks/notcheck')
                         span.big
-                        | 被检举的任务
+                        | 未审核任务
                       if admin.isSuper
                         .floor
                         a(href='/admin/add')

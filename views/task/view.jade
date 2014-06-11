@@ -24,7 +24,17 @@ block body
             | 雇主联系方式
             | 电话:#{task.publisherPhone}
             | 邮箱:#{task.publisherEmail}
-      if userid == task.publisherId
+      if admin
+        if !task.isCheck
+          .editor_buttons
+            a#submit_btn.btn.btn-primary(href='/task/check/'+task.id) 通过审核
+        else
+          .editor_buttons
+            a#submit_btn.btn.btn-danger(href='/task/delete/'+task.id) 删除任务
+      else if !task.isCheck
+        .editor_buttons
+          button#submit_btn.btn.btn-danger(disabled="true") 未通过审核
+      else if userid == task.publisherId
         if task.accepterId == null
           .editor_buttons
             a#submit_btn.btn.btn-danger(href='/task/delete/'+task.id) 删除任务
@@ -49,4 +59,3 @@ block body
       else if task.accepterId != null
         .editor_buttons
           button#submit_btn.btn.btn-danger(disabled="true") 已给抢先一步
-  
