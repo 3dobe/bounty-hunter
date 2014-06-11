@@ -123,15 +123,17 @@ module.exports.routes = {
 
   //获取用户'我'所发布的任务列表
   //获取用户'我'所接受的任务列表
+  //获取用户'我'未通过审核的任务列表
+  //获取所有未通过审核的任务列表
   '/tasks/:publishOrAccept': {
     controller: 'view',
     action: 'myTasksView'
   },
 
-  //举报任务
-  'put /task/accuse': {
+  //通过任务
+  '/task/check/:id': {
     controller: 'task',
-    action: 'accuseTask'
+    action: 'checkTask'
   },
 
   /*管理员模块*/

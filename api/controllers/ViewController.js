@@ -18,8 +18,9 @@
 module.exports = {
 
   indexView : function(req, res) {
-    Task.find()
-        .sort('updatedAt')
+    Task.find({
+      isCheck: true
+    }).sort('updatedAt')
         .exec(function(err, tasks) {
           if(err) {
             res.cookie('msg', '内部错误');
@@ -88,6 +89,8 @@ module.exports = {
 
   taskView : function(req, res) {
     //任务详情页
+    var user = req.session['user'];
+    var admin = req.session['admin'];
     var id = req.params['id'];
     Task.findOne({
       id: id
@@ -100,20 +103,37 @@ module.exports = {
             res.cookie('msg', '没有此任务');
             return res.redirect('/');
           }
-          if(req.session['user']) {
+          if(!user && !admin) {
+            if(task.isCheck) {
+              return res.view('task/view', {
+                task: task
+              });
+            } else {
+              res.cookie('msg', '没有该任务');
+              return res.redirect('/');
+            }
+          }else if(user) {
+            if(task.publisherId == user.id) {
+              return res.view('task/view', {
+                username: user.name,
+                userid: user.id,
+                avatar: user.avatar,
+                task: task
+              });
+            } else if(task.isCheck) {
+              return res.view('task/view', {
+                username: user.name,
+                userid: user.id,
+                avatar: user.avatar,
+                task: task
+              });
+            } else {
+              res.cookie('msg', '没有该任务');
+              return res.redirect('/');
+            }
+          } else if(admin) {
             return res.view('task/view', {
-              username: req.session['user'].name,
-              userid: req.session['user'].id,
-              avatar: req.session['user'].avatar,
-              task: task
-            });
-          } else if(req.session['admin']) {
-            return res.view('task/view', {
-              admin: req.session['admin'],
-              task: task
-            });
-          } else {
-            return res.view('task/view', {
+              admin: admin,
               task: task
             });
           }
@@ -158,20 +178,16 @@ module.exports = {
   },
 
   myTasksView: function(req, res) {
-    if(req.session['admin']) {
-      res.cookie('msg', '别闹了管理员先生');
-      return res.redirect('/');
-    } else if(!req.session['user']) {
-      res.cookie('msg', '用户请先登录');
+    if(!req.session['admin'] && !req.session['user']) {
+      res.cookie('msg', '请先登录');
       return res.redirect('/login');
     }
-    var id = req.session['user'].id;
-    var username = req.session['user'].name;
-    var avatar = req.session['user'].avatar;
+    var user = req.session['user'];
     var sign = req.params['publishOrAccept'];
-    if(sign == 'publish'){
+    if(sign == 'publish' && user){
       Task.find({
-        publisherId: id
+        publisherId: user.id,
+        isCheck: true
       }).done(function(err, tasks) {
             if(err) {
               res.cookie('msg', '内部错误');
@@ -179,22 +195,22 @@ module.exports = {
             }
             if(tasks.length == 0) {
               return res.view('home/tasklist', {
-                username: username,
-                avatar: avatar,
+                username: user.name,
+                avatar: user.avatar,
                 title: '我发布的任务',
                 none: 1
               });
             }
             return res.view('home/tasklist', {
-              username: username,
-              avatar: avatar,
+              username: user.name,
+              avatar: user.avatar,
               title: '我发布的任务',
               tasks: tasks
             });
           });
-    } else if(sign == 'accept') {
+    } else if(sign == 'accept' && user) {
       Task.find({
-        accepterId: id
+        accepterId: user.id
       }).done(function(err, tasks) {
             if(err) {
               res.cookie('msg', '内部错误');
@@ -202,21 +218,64 @@ module.exports = {
             }
             if(tasks.length == 0) {
               return res.view('home/tasklist', {
-                username: username,
-                avatar: avatar,
+                username: user.name,
+                avatar: user.avatar,
                 title: '我接受的任务',
                 none: 1
               });
             }
             return res.view('home/tasklist', {
-              username: username,
-              avatar: avatar,
+              username: user.name,
+              avatar: user.avatar,
               title: '我接受的任务',
               tasks: tasks
             });
           });
-    } else {
-      return res.view('404');
+    } else if(sign == 'notcheck' && user){
+      Task.find({
+        publisherId: user.id,
+        isCheck: false
+      }).done(function(err, tasks) {
+            if(err) {
+              res.cookie('msg', '内部错误');
+              return res.redirect('/');
+            }
+            if(tasks.length == 0) {
+              return res.view('home/tasklist', {
+                username: user.name,
+                avatar: user.avatar,
+                title: '我的未审核任务',
+                none: 1
+              });
+            }
+            return res.view('home/tasklist', {
+              username: user.name,
+              avatar: user.avatar,
+              title: '我的未审核任务',
+              tasks: tasks
+            });
+          });
+    } else if(sign == 'notcheck' && req.session['admin']) {
+      Task.find({
+        isCheck: false
+      }).done(function(err, tasks) {
+            if(err) {
+              res.cookie('msg', '内部错误');
+              return res.redirect('/');
+            }
+            if(tasks.length == 0) {
+              return res.view('home/tasklist', {
+                admin: req.session['admin'],
+                title: '未审核任务',
+                none: 1
+              });
+            }
+            return res.view('home/tasklist', {
+              admin: req.session['admin'],
+              title: '未审核任务',
+              tasks: tasks
+            });
+          });
     }
   }
 };
