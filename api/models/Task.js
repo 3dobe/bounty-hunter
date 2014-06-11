@@ -36,12 +36,12 @@ module.exports = {
       type: 'string',
       required: true
     },
-    accepterId: 'string',
-    isFinish: {
+    isCheck: {
       type: 'boolean',
       defaultsTo: false
     },
-    accuse: {
+    accepterId: 'string',
+    isFinish: {
       type: 'boolean',
       defaultsTo: false
     }

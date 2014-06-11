@@ -83,19 +83,40 @@ module.exports = {
   },
 
   destroy : function(req, res) {
-    var uid = req.session['user'].id;
     var id = req.params['id'];
-    Task.destroy({
-      id: id,
-      publisherId: uid
-    }).done(function(err) {
-          if(err) {
-            res.cookid('msg', '内部错误');
-            return res.redirect('back');
-          }
-          res.cookie('msg', '删除成功');
-          return res.redirect('/');
-        });
+    if(req.session['admin']) {
+      Task.destroy({
+        id: id
+      }).done(function(err) {
+            if(err) {
+              res.cookid('msg', '内部错误');
+              return res.redirect('back');
+            }
+            res.cookie('msg', '删除成功');
+            return res.redirect('/');
+          });
+    } else {
+      var uid = req.session['user'].id;
+      Task.destroy({
+        id: id,
+        publisherId: uid
+      }).done(function(err) {
+            if(err) {
+              res.cookid('msg', '内部错误');
+              return res.redirect('back');
+            }
+            if(!task) {
+              res.cookid('msg', '没有该任务');
+              return res.redirect('/');
+            }
+            if(task.accepterId) {
+              res.cookie('msg', '已有人接受该任务,删除失败');
+              return res.redirect('back');
+            }
+            res.cookie('msg', '删除成功');
+            return res.redirect('/');
+          });
+    }
   },
 
   accept : function(req, res) {
@@ -104,6 +125,7 @@ module.exports = {
     var id = req.session['user'].id;
     Task.findOne({
       id : tid,
+      isCheck : true,
       accepterId : null
     }).done(function (err, task) {
       if(err) {
@@ -161,7 +183,31 @@ module.exports = {
         });
   },
 
-  accuseTask : function(req, res) {
-
+  checkTask : function(req, res) {
+    var id = req.params['id'];
+    Task.findOne({
+      id : id,
+      isCheck : false
+    }).done(function (err, task) {
+          if(err) {
+            console.log(err);
+            res.cookie('msg', '内部错误');
+            return res.redirect('back');
+          }
+          if(!task) {
+            res.cookie('msg', '没有该任务');
+            return res.redirect('back');
+          }
+          task.isCheck = true;
+          task.save(function(err) {
+            if(err) {
+              console.log(err);
+              res.cookie('msg', '内部错误');
+              return res.redirect('back');
+            }
+            res.cookie('msg', '通过审核');
+            return res.redirect('/task/view/'+task.id);
+          });
+        });
   }
 };

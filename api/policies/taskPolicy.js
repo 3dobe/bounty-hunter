@@ -6,6 +6,7 @@ module.exports = function(req, res, next) {
     //获取任何用户都能看到的任务时 直接通过
     return next();
   }
+  console.log(req.target.action);
   if (req.session['user']) {
     //如session中user信息,则向req中添加id信息
     var user = req.session['user'];
@@ -37,7 +38,17 @@ module.exports = function(req, res, next) {
       req.query['uid'] = user.id;
       return next();
     }
+  } else if(req.session['admin']) {
+    if(req.target.action === 'checktask') {
+      return next();
+    } else if(req.target.action === 'destroy') {
+      return next();
+    } else {
+      res.cookie('msg', '管理员请别闹');
+      return res.redirect('/');
+    }
   } else {
-    return res.forbidden('请先登录');
+    res.cookie('msg', '请先登录');
+    return res.redirect('/login');
   }
 };
