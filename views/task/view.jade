@@ -59,3 +59,19 @@ block body
       else if task.accepterId != null
         .editor_buttons
           button#submit_btn.btn.btn-danger(disabled="true") 已给抢先一步
+  .panel
+    .header 评论
+      .inner.no-padding
+        #disqus_thread
+        script(type='text/javascript').
+         var disqus_shortname = 'bounty-hunter';
+          (function() {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        a.dsq-brlink(href='http://disqus.com')
+         | comments powered by
+         span.logo-disqus Disqus
