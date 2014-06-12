@@ -16,7 +16,35 @@
  */
 
 module.exports = {
-  addAdmin : function(req, res) {
+  add : function(req, res) {
     //超级管理员添加普通管理员
+    var username = req.body['username'];
+    var password = req.body['password'];
+    Admin.findOne({
+      username: username
+    }).done(function(err, admin) {
+          if(err) {
+            res.cookid('msg', '内部错误');
+            return res.redirect('/admin/add');
+          }
+          if(admin) {
+            res.cookie('msg', '用户名已存在');
+            return res.redirect('/admin/add');
+          }
+          if(!admin) {
+            Admin.create({
+              username : username,
+              password : password
+            }).done(function(err, admin) {
+                  if(err) {
+                    res.cookid('msg', '内部错误');
+                    return res.redirect('/admin/add');
+                  }
+                  console.log("Admin created:", admin);
+                  res.cookie('msg', '创建成功');
+                  return res.redirect('/admin/add');
+                });
+          }
+        });
   }
 };

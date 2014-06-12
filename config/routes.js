@@ -137,11 +137,18 @@ module.exports.routes = {
   },
 
   /*管理员模块*/
+  //添加管理员页面
+  '/admin/add': {
+    controller: 'view',
+    action: 'addAdminView'
+  },
+
   //添加管理员
-  'put /addAdmin': {
+  'post /do/admin/add': {
     controller: 'manage',
-    action: 'addAdmin'
+    action: 'add'
   }
+
 
   //
   /*

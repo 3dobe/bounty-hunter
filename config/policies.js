@@ -26,6 +26,10 @@ module.exports.policies = {
 
   TaskController: {
     '*': 'taskPolicy'
+  },
+
+  ManageController: {
+    add : 'ManagePolicy'
   }
 
 

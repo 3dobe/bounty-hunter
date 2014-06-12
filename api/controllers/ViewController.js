@@ -277,5 +277,19 @@ module.exports = {
             });
           });
     }
+  },
+
+  addAdminView: function(req, res) {
+    if(!req.session['admin']) {
+      res.cookie('msg', '你权限不够喔');
+      return res.redirect('/');
+    } else if(!req.session['admin'].isSuper) {
+      res.cookie('msg', '你权限不够喔');
+      return res.redirect('/');
+    } else {
+      return res.view('admin/add', {
+        admin: req.session['admin']
+      });
+    }
   }
 };

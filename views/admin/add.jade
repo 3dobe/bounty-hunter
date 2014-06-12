@@ -1,3 +1,24 @@
 //
    Created by Administrator on 14-6-11.
 
+extend ../layout
+block body
+  .panel
+    .header
+      ul.breadcrumb
+        li
+          a(href='/') 主页
+          span.divider /
+        li.active 添加管理员
+    .inner
+      form#signin_form.form-horizontal(action='/do/admin/add', method='post')
+        .control-group
+          label.control-label 用户名
+          .controls
+            input.input-xlarge(name='username', size='30', type='text', placeholder='必填项', required='required')
+        .control-group
+          label.control-label 密码
+          .controls
+            input.input-xlarge(name='password', size='30', type='password', placeholder='必填项', required='required')
+        .form-actions
+          input.btn(type='submit', value='提交')
