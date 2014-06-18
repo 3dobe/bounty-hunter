@@ -1,7 +1,7 @@
 {
   "name": "bounty-hunter",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "a Sails application",
   "dependencies": {
     "sails": "0.9.16",

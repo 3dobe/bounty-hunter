@@ -54,8 +54,12 @@ block body
         .editor_buttons
           a#submit_btn.btn.btn-primary(href='/task/accept/'+task.id) 接受任务
       else if task.accepterId == userid
-        .editor_buttons
-          button#submit_btn.btn.btn-primary(disabled="true") 你已接受该任务
+        if task.isFinish
+          .editor_buttons
+            button#submit_btn.btn.btn-primary(disabled="true") 你已完成该任务
+        else
+          .editor_buttons
+            button#submit_btn.btn.btn-primary(disabled="true") 你已接受该任务
       else if task.accepterId != null
         .editor_buttons
           button#submit_btn.btn.btn-danger(disabled="true") 已给抢先一步
